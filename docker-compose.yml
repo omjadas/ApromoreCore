@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  apromore:
+    build: .
+    container_name: apromore
+    environment:
+      JAVA_OPTS: "-server -Xmx8g -Xmn1g"
+    ports:
+      - "80:8080"
+    depends_on:
+      - apromoresql
+
+  apromoresql:
+    image: mysql:5.7
+    container_name: apromoresql
+    command: --max_allowed_packet=2G
+    environment:
+      MYSQL_DATABASE: apromore
+      MYSQL_ROOT_PASSWORD: MAcri
+      MYSQL_USER: apromore
+      MYSQL_PASSWORD: MAcri
+    expose:
+      - "3306"
+
+  impala:
+    image: apache/kudu:impala-latest
+    volumes:
+      - preprocess-data:/tmp/preprocess_data
+    command: impala
+
+volumes:
+  preprocess-data:
