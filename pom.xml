@@ -44,7 +44,7 @@
     <modules>
         <!-- OSGI -->
         <module>Apromore-OSGI-Bundles/log-osgi</module>
-        <module>Apromore-OSGI-Bundles/lpsolve-osgi</module>        
+        <module>Apromore-OSGI-Bundles/lpsolve-osgi</module>
         <module>Apromore-OSGI-Bundles/hpi-bpt-osgi</module>
         <module>Apromore-OSGI-Bundles/eclipse-collections-osgi</module>
         <module>Apromore-OSGI-Bundles/json-osgi</module>
@@ -54,15 +54,15 @@
         <module>Apromore-OSGI-Bundles/prom-models-osgi</module>
         <module>Apromore-OSGI-Bundles/prom-widgets-osgi</module>
         <module>Apromore-OSGI-Bundles/prom-bpmn-osgi</module>
-                
+
         <!-- Core Components -->
         <module>Apromore-Core-Components/Apromore-Portal</module>
         <module>Apromore-Core-Components/Apromore-Manager</module>
-        <module>Apromore-Core-Components/Apromore-BPMNEditor</module>        
-        
+        <module>Apromore-Core-Components/Apromore-BPMNEditor</module>
+
         <!-- Custom Plugins -->
         <module>Apromore-Plugins</module>
-        
+
         <module>Apromore-Custom-Plugins/SplitMiner-Logic</module>
         <module>Apromore-Custom-Plugins/File-Portal-Plugin</module>
         <module>Apromore-Custom-Plugins/Generic-Portal-Plugin</module>
@@ -75,29 +75,29 @@
         <module>Apromore-Custom-Plugins/CSVImporter-Portal</module>
         <module>Apromore-Custom-Plugins/CSVExporter-Logic</module>
         <module>Apromore-Custom-Plugins/CSVExporter-Portal</module>
-        
+
         <module>Apromore-Custom-Plugins/Log-Animation-Logic</module>
         <module>Apromore-Custom-Plugins/Log-Animation-Portal-Plugin</module>
-        
+
         <module>Apromore-Custom-Plugins/Log-Logic</module>
         <module>Apromore-Custom-Plugins/Merge-Logic</module>
         <module>Apromore-Custom-Plugins/Merge-Portal-Plugin</module>
         <module>Apromore-Custom-Plugins/Process-Discoverer-Logic</module>
-        <module>Apromore-Custom-Plugins/Process-Discoverer-Portal-Plugin</module>        
+        <module>Apromore-Custom-Plugins/Process-Discoverer-Portal-Plugin</module>
         <module>Apromore-Custom-Plugins/Similarity-Search-Logic</module>
         <module>Apromore-Custom-Plugins/Similarity-Search-Portal-Plugin</module>
-        
+
         <!-- <module>Apromore-Custom-Plugins/Similarity-Clusters-Portal-Plugin</module> -->
 
         <!-- Clients that we can distribute -->
         <module>Apromore-Clients/portal-model</module>
         <module>Apromore-Clients/manager-client</module>
         <module>Apromore-Clients/manager-security</module>
-        
+
         <!-- Extras -->
         <module>Apromore-Extras/OpenXES</module>
-        <module>Apromore-Extras/APMLogModule</module>        
-        
+        <module>Apromore-Extras/APMLogModule</module>
+
         <!-- Tools -->
         <module>Apromore-Extras/Build-Tools</module>
         <module>Apromore-Extras/Chiaroscuro-Theme</module>
@@ -107,7 +107,6 @@
         <module>Apromore-Assembly/Manager-Assembly</module>
         <module>Apromore-Assembly/Portal-Assembly</module>
         <module>Apromore-Assembly/Custom-Plugins-Assembly</module>
-
     </modules>
 
     <properties>
@@ -292,13 +291,13 @@
         <javadocs.skip>true</javadocs.skip>
         <pmd.skip>true</pmd.skip>
         <minimizeJar>false</minimizeJar>
-        
+
         <flyway.version>6.0.0</flyway.version>
         <flyway.user>apromore</flyway.user>
         <flyway.password>MAcri</flyway.password>
         <flyway.url>jdbc:mysql://localhost:3306/apromore</flyway.url>
         <flyway.schemas>apromore</flyway.schemas>
-        
+
     </properties>
 
     <dependencyManagement>
@@ -349,12 +348,12 @@
                 <groupId>org.apromore</groupId>
                 <artifactId>zk-osgi</artifactId>
                 <version>${zk.version}</version>
-            </dependency>           
+            </dependency>
             <dependency>
                 <groupId>org.apromore</groupId>
                 <artifactId>bpmntk-osgi</artifactId>
                 <version>2.1</version>
-            </dependency>             
+            </dependency>
             <dependency>
                 <groupId>org.apromore</groupId>
                 <artifactId>log-osgi</artifactId>
@@ -398,7 +397,7 @@
                 <artifactId>apmlog</artifactId>
                 <version>1.0.0</version>
             </dependency>
-<!--
+            <!--
             <dependency>
                 <groupId>org.deckfour.xes</groupId>
                 <artifactId>OpenXES</artifactId>
@@ -1252,7 +1251,7 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-core</artifactId>
                 <version>${flyway.version}</version>
-            </dependency>            
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -1303,8 +1302,8 @@
             <url>http://mavensync.zkoss.org/maven2</url>
         </repository>
         <!--<repository>-->
-            <!--<id>flyway-repo</id>-->
-            <!--<url>https://repo.flywaydb.org/repo</url>-->
+        <!--<id>flyway-repo</id>-->
+        <!--<url>https://repo.flywaydb.org/repo</url>-->
         <!--</repository>-->
     </repositories>
     <pluginRepositories>
@@ -1316,12 +1315,12 @@
         <pluginRepository>
             <id>flyway-repo</id>
             <url>https://repo.flywaydb.org/repo</url>
-        </pluginRepository>   
-		<pluginRepository>
-			<id>zkmaven</id>
-			<name>ZK Maven Plugin Repository</name>
-			<url>http://mavensync.zkoss.org/maven2</url>
-		</pluginRepository>        
+        </pluginRepository>
+        <pluginRepository>
+            <id>zkmaven</id>
+            <name>ZK Maven Plugin Repository</name>
+            <url>http://mavensync.zkoss.org/maven2</url>
+        </pluginRepository>
     </pluginRepositories>
 
     <build>
@@ -1793,7 +1792,8 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>${flyway.version}</version>
             </plugin>
-            <plugin> <!-- http://www.mojohaus.org/license-maven-plugin/examples/example-thirdparty.html -->
+            <plugin>
+                <!-- http://www.mojohaus.org/license-maven-plugin/examples/example-thirdparty.html -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
                 <configuration>
@@ -1893,7 +1893,7 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <skip>${jacoco.skip}</skip>
-                    <check/>
+                    <check />
                 </configuration>
                 <reportSets>
                     <reportSet>
