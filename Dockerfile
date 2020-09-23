@@ -76,3 +76,10 @@ RUN npm i -g less
 COPY . .
 
 RUN mvn -B -T 1C package -DskipTests
+
+FROM rennergabor/virgo-tomcat-server:3.6.4
+
+COPY --from=build /app/apromore-core.plan /opt/virgo/pickup/
+COPY --from=build /app/Apromore-Assembly/Custom-Plugins-Assembly/target/repository/usr/*.jar /opt/virgo/pickup/
+COPY --from=build /app/Apromore-Assembly/Manager-Assembly/target/repository/usr/*.jar /opt/virgo/pickup/
+COPY --from=build /app/Apromore-Assembly/Portal-Assembly/target/repository/usr/*.jar /opt/virgo/pickup/
