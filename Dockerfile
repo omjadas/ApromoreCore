@@ -2,7 +2,7 @@ FROM maven:3-jdk-8-alpine as build
 
 WORKDIR /app
 
-RUN apk add --no-cache npm
+RUN apk add --no-cache npm apache-ant
 
 # copy pom files
 COPY Apromore-Assembly/Custom-Plugins-Assembly/pom.xml Apromore-Assembly/Custom-Plugins-Assembly/
@@ -76,10 +76,19 @@ RUN npm i -g less
 COPY . .
 
 RUN mvn -B -T 1C package -DskipTests
+RUN ant deploy-virgo
+RUN cp site.properties.docker ./Apromore-Assembly/virgo-tomcat-server-3.6.4.RELEASE/repository/usr/site.properties
 
-FROM rennergabor/virgo-tomcat-server:3.6.4
+ENV JAVA_OPTS="-server"
 
-COPY --from=build /app/apromore-core.plan /opt/virgo/pickup/
-COPY --from=build /app/Apromore-Assembly/Custom-Plugins-Assembly/target/repository/usr/*.jar /opt/virgo/pickup/
-COPY --from=build /app/Apromore-Assembly/Manager-Assembly/target/repository/usr/*.jar /opt/virgo/pickup/
-COPY --from=build /app/Apromore-Assembly/Portal-Assembly/target/repository/usr/*.jar /opt/virgo/pickup/
+FROM openjdk:8-alpine
+
+RUN apk add --no-cache bash
+
+WORKDIR /apromore
+
+COPY --from=build /app/Apromore-Assembly/virgo-tomcat-server-3.6.4.RELEASE/ /apromore/
+
+ENV JAVA_OPTS="-server"
+
+CMD ["/apromore/bin/startup.sh", "-clean"]
