@@ -51,11 +51,11 @@
                             !org.zkoss.zkex.theme,
                             !org.zkoss.zkmax.theme,
                             !org.zkoss.zsoup.*,
-
                             *
                         </Import-Package>
                         <DynamicImport-Package>
                             org.apromore.plugin.portal.*,
+                            org.apromore.etlplugin.portal,
                             dashboard,
                             zul.*
                         </DynamicImport-Package>                        
