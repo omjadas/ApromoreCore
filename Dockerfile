@@ -79,8 +79,6 @@ RUN mvn -B -T 1C package -DskipTests
 RUN ant deploy-virgo
 RUN cp site.properties.docker ./Apromore-Assembly/virgo-tomcat-server-3.6.4.RELEASE/repository/usr/site.properties
 
-ENV JAVA_OPTS="-server"
-
 FROM openjdk:8-alpine
 
 RUN apk add --no-cache bash
