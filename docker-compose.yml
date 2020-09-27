@@ -13,7 +13,6 @@ services:
       - impala
 
   db:
-    image: mysql:5
     command: --max_allowed_packet=2G
     environment:
       MYSQL_DATABASE: apromore
