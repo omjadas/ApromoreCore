@@ -31,6 +31,9 @@ import org.apromore.portal.dialogController.ImportController;
 import org.apromore.portal.dialogController.MainController;
 import org.apromore.portal.exception.DialogException;
 import org.zkoss.zul.Messagebox;
+//import org.apromore.etlplugin.logic.services.ETLPluginLogic;
+
+import javax.inject.Inject;
 
 public class UploadFilePlugin extends DefaultPortalPlugin {
 
@@ -41,7 +44,6 @@ public class UploadFilePlugin extends DefaultPortalPlugin {
     private MainController mainC;
 
     // PortalPlugin overrides
-
     @Override
     public String getLabel(Locale locale) {
         return label;

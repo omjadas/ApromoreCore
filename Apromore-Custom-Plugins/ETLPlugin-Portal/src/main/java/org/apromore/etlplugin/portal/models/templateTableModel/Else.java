@@ -19,23 +19,32 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package org.apromore.zk;
+package org.apromore.etlplugin.portal.models.templateTableModel;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zkoss.zk.ui.Desktop;
-import org.zkoss.zk.ui.util.DesktopInit;
+import org.jooq.Condition;
 
-public class ApromoreDesktopInit implements DesktopInit {
+/**
+ * This class handles the Else type of case that generate Jooq
+ * query for the operation.
+ */
+public class Else extends Case {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApromoreDesktopInit.class);
+    private static final String ELSE_TYPE = "ELSE";
 
-    @Override
-    public void init(Desktop desktop, Object request) throws Exception {
-        LOGGER.debug("Init desktop " + desktop + " with request " + request);
-        Object notice = desktop.getWebApp().getAttribute("org.zkoss.zk.ui.client.notice");
-        if (notice != null) {
-            desktop.getWebApp().removeAttribute("org.zkoss.zk.ui.client.notice");
-        }
+    /**
+     * Constructor to set the type of case.
+     */
+    public Else() {
+        super(ELSE_TYPE);
+    }
+
+    /**
+     * Dummy method to keep the compiler happy. The method is
+     * implemented in If type case instead.
+     *
+     * @return null.
+     */
+    public Condition getCondition() {
+        return null;
     }
 }

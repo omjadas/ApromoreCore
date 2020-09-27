@@ -19,23 +19,16 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package org.apromore.zk;
+package org.apromore.etlplugin.portal.models.templateTableModel;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zkoss.zk.ui.Desktop;
-import org.zkoss.zk.ui.util.DesktopInit;
-
-public class ApromoreDesktopInit implements DesktopInit {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApromoreDesktopInit.class);
-
-    @Override
-    public void init(Desktop desktop, Object request) throws Exception {
-        LOGGER.debug("Init desktop " + desktop + " with request " + request);
-        Object notice = desktop.getWebApp().getAttribute("org.zkoss.zk.ui.client.notice");
-        if (notice != null) {
-            desktop.getWebApp().removeAttribute("org.zkoss.zk.ui.client.notice");
-        }
-    }
+/**
+ * List of available comparison types.
+ */
+public enum ComparisonType {
+    LESS_THAN,
+    GREATER_THAN,
+    EQUALS,
+    NOT_EQUAL,
+    LESS_THAN_EQUAL,
+    GREATER_THAN_EQUAL
 }
