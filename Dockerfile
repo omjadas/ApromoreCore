@@ -6,13 +6,13 @@ RUN apk add --no-cache npm apache-ant
 
 # copy pom files
 COPY Apromore-Assembly/Custom-Plugins-Assembly/pom.xml Apromore-Assembly/Custom-Plugins-Assembly/
-COPY Apromore-Assembly/pom.xml Apromore-Assembly/
-COPY Apromore-Clients/manager-client/pom.xml Apromore-Clients/manager-client/
-COPY Apromore-Assembly/Portal-Assembly/pom.xml Apromore-Assembly/Portal-Assembly/
-COPY Apromore-Clients/portal-model/pom.xml Apromore-Clients/portal-model/
-COPY Apromore-Clients/manager-security/pom.xml Apromore-Clients/manager-security/
-COPY Apromore-Core-Components/Apromore-BPMNEditor/pom.xml Apromore-Core-Components/Apromore-BPMNEditor/
 COPY Apromore-Assembly/Manager-Assembly/pom.xml Apromore-Assembly/Manager-Assembly/
+COPY Apromore-Assembly/pom.xml Apromore-Assembly/
+COPY Apromore-Assembly/Portal-Assembly/pom.xml Apromore-Assembly/Portal-Assembly/
+COPY Apromore-Clients/manager-client/pom.xml Apromore-Clients/manager-client/
+COPY Apromore-Clients/manager-security/pom.xml Apromore-Clients/manager-security/
+COPY Apromore-Clients/portal-model/pom.xml Apromore-Clients/portal-model/
+COPY Apromore-Core-Components/Apromore-BPMNEditor/pom.xml Apromore-Core-Components/Apromore-BPMNEditor/
 COPY Apromore-Core-Components/Apromore-Manager/pom.xml Apromore-Core-Components/Apromore-Manager/
 COPY Apromore-Core-Components/Apromore-Portal/pom.xml Apromore-Core-Components/Apromore-Portal/
 COPY Apromore-Custom-Plugins/About-Portal-Plugin/pom.xml Apromore-Custom-Plugins/About-Portal-Plugin/

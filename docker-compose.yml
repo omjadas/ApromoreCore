@@ -19,6 +19,8 @@ services:
       MYSQL_ROOT_PASSWORD: MAcri
       MYSQL_USER: apromore
       MYSQL_PASSWORD: MAcri
+    volumes:
+      - ./Supplements/database/db-mysql.sql:/docker-entrypoint-initdb.d/apromore.sql
     expose:
       - "3306"
 
