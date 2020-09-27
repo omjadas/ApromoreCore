@@ -6,8 +6,6 @@ services:
     environment:
       IMPALA_LINK: jdbc:impala://impala:21050
       JAVA_OPTS: -server -Xmx8g -Xmn1g
-    ports:
-      - "9000:9000"
     depends_on:
       - db
       - impala
