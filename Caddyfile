@@ -1,0 +1,9 @@
+bp.omjad.as
+
+encode gzip zstd
+
+reverse_proxy apromore:9000
+
+basicauth {
+    {$BASIC_AUTH_USERNAME} {$BASIC_AUTH_PASSWORD_HASH}
+}

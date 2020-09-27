@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  apromore:
+    build: .
+    ports:
+      - "9000:9000"
+
+  db:
+    ports:
+      - "3306:3306"
+
+  impala:
+    ports:
+      - "21050:21050"
+
+volumes:
+  preprocess-data:

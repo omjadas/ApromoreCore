@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  apromore:
+    image: omjadas/apromore:latest
+    environment:
+      IMPALA_LINK: jdbc:impala://impala:21050
+      JAVA_OPTS: -server -Xmx8g -Xmn1g
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+      - impala
+
+  db:
+    image: mysql:5
+    command: --max_allowed_packet=2G
+    environment:
+      MYSQL_DATABASE: apromore
+      MYSQL_ROOT_PASSWORD: MAcri
+      MYSQL_USER: apromore
+      MYSQL_PASSWORD: MAcri
+
+  impala:
+    image: apache/kudu:impala-latest
+    volumes:
+      - preprocess-data:/tmp/preprocess_data
+    command: impala
+
+volumes:
+  preprocess-data:
