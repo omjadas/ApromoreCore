@@ -25,6 +25,8 @@ COPY Apromore-Custom-Plugins/CSVExporter-Logic/pom.xml Apromore-Custom-Plugins/C
 COPY Apromore-Custom-Plugins/CSVExporter-Portal/pom.xml Apromore-Custom-Plugins/CSVExporter-Portal/
 COPY Apromore-Custom-Plugins/CSVImporter-Logic/pom.xml Apromore-Custom-Plugins/CSVImporter-Logic/
 COPY Apromore-Custom-Plugins/CSVImporter-Portal/pom.xml Apromore-Custom-Plugins/CSVImporter-Portal/
+COPY Apromore-Custom-Plugins/ETLPlugin-Logic/pom.xml Apromore-Custom-Plugins/ETLPlugin-Logic/
+COPY Apromore-Custom-Plugins/ETLPlugin-Portal/pom.xml Apromore-Custom-Plugins/ETLPlugin-Portal/
 COPY Apromore-Custom-Plugins/File-Portal-Plugin/pom.xml Apromore-Custom-Plugins/File-Portal-Plugin/
 COPY Apromore-Custom-Plugins/Generic-Portal-Plugin/pom.xml Apromore-Custom-Plugins/Generic-Portal-Plugin/
 COPY Apromore-Custom-Plugins/Log-Animation-Logic/pom.xml Apromore-Custom-Plugins/Log-Animation-Logic/
