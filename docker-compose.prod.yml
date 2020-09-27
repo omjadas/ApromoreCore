@@ -5,7 +5,6 @@ services:
     restart: always
 
   db:
-    image: omjadas/apromore:db
     restart: always
 
   impala:
