@@ -19,21 +19,16 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package org.apromore.etlplugin.logic.services.impl;
-
-import org.apromore.etlplugin.logic.services.ETLPluginLogic;
+package org.apromore.etlplugin.portal.models.templateTableModel;
 
 /**
- * ETL Plugin logic dummy.
+ * List of available comparison types.
  */
-public class ETLPluginLogicImpl implements ETLPluginLogic {
-
-    /**
-     * Dummy test.
-     *
-     * @return random integer.
-     */
-    public int getTest() {
-        return 109;
-    }
+public enum ComparisonType {
+    LESS_THAN,
+    GREATER_THAN,
+    EQUALS,
+    NOT_EQUAL,
+    LESS_THAN_EQUAL,
+    GREATER_THAN_EQUAL
 }

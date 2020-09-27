@@ -19,16 +19,20 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package org.apromore.etlplugin.logic.services;
+package org.apromore.etlplugin.logic.services.impl;
 
 /**
- * ETL Plugin logic interface.
+ * Thrown when an unknown file type is attempted to be uploaded.
  */
-public interface ETLPluginLogic {
+public class IllegalFileTypeException extends Exception {
+    private static final long serialVersionUID = 1867207959897992342L;
+
     /**
-     * Dummy.
+     * Initialise exception.
      *
-     * @return integer.
+     * @param message message of the exception
      */
-    int getTest();
+    public IllegalFileTypeException(String message) {
+        super(message);
+    }
 }
