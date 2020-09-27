@@ -2,9 +2,10 @@ version: "3.8"
 
 services:
   apromore:
-    build: .
+    image: omjadas/apromore:latest
     environment:
-      JAVA_OPTS: "-server -Xmx8g -Xmn1g"
+      IMPALA_LINK: jdbc:impala://impala:21050
+      JAVA_OPTS: -server -Xmx8g -Xmn1g
     ports:
       - "9000:9000"
     depends_on:
@@ -19,10 +20,6 @@ services:
       MYSQL_ROOT_PASSWORD: MAcri
       MYSQL_USER: apromore
       MYSQL_PASSWORD: MAcri
-    volumes:
-      - ./Supplements/database/db-mysql.sql:/docker-entrypoint-initdb.d/apromore.sql
-    expose:
-      - "3306"
 
   impala:
     image: apache/kudu:impala-latest
