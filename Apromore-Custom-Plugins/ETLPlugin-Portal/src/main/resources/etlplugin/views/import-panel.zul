@@ -19,8 +19,13 @@
   <http://www.gnu.org/licenses/lgpl-3.0.html>.
   #L%
   -->
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>
+<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>
+<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>
+<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>
+<?script src="../../themes/ap/common/js/index.js"?>
 <?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <zk xmlns:h="native">
 <!--    <style src="../css/multi-event-log-plugin.css"/>-->
     <tabbox height="100%" apply="org.zkoss.bind.BindComposer"
@@ -35,10 +40,17 @@
                             viewModel="@id('vm_fileUpload') @init('org.apromore.etlplugin.portal.viewModels.FileUploadViewModel')">
                     <!-- Left panel section -->
 
-                    <button id="btnUpload" label="Upload"
+<!--                    <button apply="org.apromore.etlplugin.portal.viewModels.ButtonUploadController" id="btnUpload" label="Upload"-->
+<!--                        mold="trendy" hflex="1"-->
+<!--                    />-->
+                    <button id="btnUploaddded" label="Upload"
                         onClick="@command('onFileUpload')"
                         mold="trendy" hflex="1"
                     />
+
+<!--                    <button apply="org.apromore.etlplugin.portal.viewModels.ButtonUploadController" id="buttnUpload" label="Upload"-->
+<!--                        mold="trendy" hflex="1"-->
+<!--                    />-->
 
                     <space/>
 

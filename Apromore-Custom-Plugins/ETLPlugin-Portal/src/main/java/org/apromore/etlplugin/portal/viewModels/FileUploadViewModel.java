@@ -38,6 +38,7 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Fileupload;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zul.Messagebox;
 
 import java.io.IOException;
@@ -58,12 +59,8 @@ public class FileUploadViewModel {
     private static final Integer MAX_FILES_NUMBER = 10;
     private Boolean noFilesCheck;
 
-    private FileHandlerService fileHandlerService = (FileHandlerService) ((Map) Sessions.getCurrent()
-            .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-            .get("fileHandlerService");
-    private Transaction transaction = (Transaction) ((Map) Sessions.getCurrent()
-            .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-            .get("transaction");
+    private FileHandlerService fileHandlerService;
+    private Transaction transaction;
 
     @WireVariable
     private FileMetaData fileMetaData;
@@ -76,6 +73,16 @@ public class FileUploadViewModel {
      */
     @Init
     public void init() {
+        if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
+                .SESSION_ATTRIBUTE_KEY)) != null) {
+            fileHandlerService = (FileHandlerService) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileHandlerService");
+            transaction = (Transaction) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("transaction");
+        }
+
         noFilesCheck = true;
     }
 
@@ -86,8 +93,23 @@ public class FileUploadViewModel {
     @Command("onFileUpload")
     public void onFileUpload() {
 
-        Media[] medias = Fileupload.get(MAX_FILES_NUMBER);
+        System.out.println("===> Click upload");
+        Media[] medias = null;
+        try {
+            medias = Fileupload.get(MAX_FILES_NUMBER);
+        } catch (Exception e) {
+            System.out.println("===>");
+            e.printStackTrace();
+        }
 
+        if (medias != null) {
+            System.out.println("===> Media size: " + medias.length);
+        } else {
+            System.out.println("===> Media is null");
+        }
+
+        fileHandlerService.test();
+        transaction.test();
         if (medias != null && medias.length > 0 && medias.length <= 10) {
             String returnMessage;
 
@@ -175,12 +197,19 @@ public class FileUploadViewModel {
 
                 Messagebox.show(returnMessage);
             } catch (IOException e) {
+                System.out.println("===> Error! 1");
                 e.printStackTrace();
             } catch (IllegalFileTypeException e) {
+                System.out.println("===> Error! 2");
+                e.printStackTrace();
                 Messagebox.show(e.getMessage());
+            } catch (NullPointerException e) {
+                System.out.println("===> Error! 3");
+                e.printStackTrace();
             }
 
         } else {
+            System.out.println("===> Error! 4");
             Messagebox.show(
                 NULL_UPLOAD_MESSAGE,
                 ERROR,

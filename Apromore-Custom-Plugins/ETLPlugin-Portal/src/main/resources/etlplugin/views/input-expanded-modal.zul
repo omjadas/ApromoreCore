@@ -20,6 +20,11 @@
   #L%
   -->
 <?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>
+<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>
+<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>
+<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>
+<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>
+<?script src="../../themes/ap/common/js/index.js"?>
 <zk>
     <window title="@load(vm_inputExpandedWindow.filename)" border="normal" mode="highlighted"
             apply="org.zkoss.bind.BindComposer" id="inputExpandedModal" sclass="expand-window"

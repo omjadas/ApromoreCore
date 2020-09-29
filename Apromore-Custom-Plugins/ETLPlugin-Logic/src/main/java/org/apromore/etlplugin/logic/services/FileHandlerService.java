@@ -41,7 +41,7 @@ public interface FileHandlerService {
      */
     String writeFiles(Media[] medias)
                     throws IOException, IllegalFileTypeException;
-
+    void test();
     /**
      * Output a file.
      *

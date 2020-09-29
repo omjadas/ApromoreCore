@@ -21,6 +21,7 @@
  */
 package org.apromore.etlplugin.portal.viewModels;
 
+import org.apromore.etlplugin.logic.services.FileHandlerService;
 import org.apromore.etlplugin.logic.services.Transaction;
 import org.apromore.etlplugin.portal.ETLPluginPortal;
 import org.jooq.conf.ParamType;
@@ -57,9 +58,12 @@ public class InputExpandedWindowViewModel {
     public void init(@ExecutionArgParam("filename") String filename) {
         try {
             this.filename = filename;
-            transaction = (Transaction) ((Map) Sessions.getCurrent()
-                .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-                .get("transaction");
+            if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
+                    .SESSION_ATTRIBUTE_KEY)) != null) {
+                transaction = (Transaction) ((Map) Sessions.getCurrent()
+                        .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                        .get("transaction");
+            }
             resultList = transaction.executeQuery(
                     select(field("*"))
                             .from(filename)

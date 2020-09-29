@@ -52,9 +52,12 @@ public class TemplateTableBean implements InitializingBean {
     private Boolean tableVisible;
 
     public TemplateTableBean() {
-        transaction = (Transaction) ((Map) Sessions.getCurrent()
-            .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-            .get("transaction");
+        if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
+                .SESSION_ATTRIBUTE_KEY)) != null) {
+            transaction = (Transaction) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("transaction");
+        }
     }
 
     /**
