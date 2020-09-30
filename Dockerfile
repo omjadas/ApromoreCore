@@ -87,6 +87,10 @@ RUN apk add --no-cache bash
 
 WORKDIR /apromore
 
+# Needed for ETL plugin
+RUN mkdir -p /tmp/etl_data && \
+    chmod -R 777 /tmp/etl_data
+
 COPY --from=build /app/Apromore-Assembly/virgo-tomcat-server-3.6.4.RELEASE/ /apromore/
 
 ENV JAVA_OPTS="-server"
