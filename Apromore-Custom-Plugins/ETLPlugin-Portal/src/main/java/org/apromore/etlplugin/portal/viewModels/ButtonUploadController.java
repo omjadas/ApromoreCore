@@ -30,16 +30,20 @@ import org.apromore.etlplugin.portal.models.sidePanelModel.FileMetaData;
 import org.apromore.etlplugin.portal.models.templateTableModel.TemplateTableBean;
 import org.jooq.conf.ParamType;
 import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.annotation.BindingParam;
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
+import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Messagebox;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -49,36 +53,157 @@ import java.util.Map;
 
 import static org.jooq.impl.DSL.*;
 
-public class ButtonUploadController extends SelectorComposer<Button> {
+@VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
+public class ButtonUploadController {
     private static final String NULL_UPLOAD_MESSAGE = "No file is selected";
     private static final String ERROR = "Error";
     private static final Integer MAX_FILES_NUMBER = 10;
     private Boolean noFilesCheck;
 
+    private FileHandlerService fileHandlerService;
+    private Transaction transaction;
+
+    @WireVariable
+    private FileMetaData fileMetaData;
+
+    @WireVariable
+    private TemplateTableBean templateTableBean;
+
+    /**
+     * Initialise.
+     */
+    @Init
+    public void init() {
+        if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
+                .SESSION_ATTRIBUTE_KEY)) != null) {
+            fileHandlerService = (FileHandlerService) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileHandlerService");
+            transaction = (Transaction) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("transaction");
+        }
+
+        noFilesCheck = true;
+    }
+
     /**
      * Describes the actions taken when a file is uploaded.
      */
-    @Listen("onUpload = #btnUpload")
-    public void onFileUpload(UploadEvent event) {
+//    @Listen("onUpload = uploadButtonmvc")
+    @Command("onFileUpload")
+    public void onFileUpload(@BindingParam("event") UploadEvent event) {
 
-        System.out.println("===> Click upload");
+        System.out.println("===> MVC Click upload");
 //        Media[] medias = Fileupload.get(MAX_FILES_NUMBER);
         Media[] medias = event.getMedias();
 
         if (medias != null) {
-            System.out.println("===> Media size: " + medias.length);
+            System.out.println("===> MVC Media size: " + medias.length);
         } else {
-            System.out.println("===> Media is null");
+            System.out.println("===> MVC Media is null");
         }
 
         if (medias != null && medias.length > 0 && medias.length <= 10) {
             String returnMessage;
-            System.out.println("===> Media is present");
-            Messagebox.show(
-                    "Media recieved!",
-                    ERROR,
-                    Messagebox.OK,
-                    Messagebox.ERROR);
+
+            try {
+                System.out.println("===> Starting to write.");
+                returnMessage = fileHandlerService.writeFiles(medias);
+                System.out.println("===> done: " + returnMessage);
+
+                // If the file was written then load in impala and get snippet
+                if (returnMessage.equals("Upload Success")) {
+                    List<List<String>> resultsList = null;
+
+                    for (int i = 0; i < medias.length; i++) {
+                        Media media = medias[i];
+                        try {
+                            transaction.addTable(media.getName());
+
+                            resultsList = transaction.executeQuery(
+                                    select(field("*"))
+                                            .from(FilenameUtils
+                                            .removeExtension(media.getName()))
+                                            .limit(50)
+                                            .getSQL(ParamType.INLINED),
+                                    false
+                            );
+
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Prevent the same file from appearing
+                        // in the list twice
+                        if (!fileMetaData.getFileMetaMap().containsKey(
+                                media.getName())) {
+                            //Store file metadata (name and column names)
+                            fileMetaData.putNewFile(
+                                    FilenameUtils.removeExtension(media.getName()),
+                                    resultsList
+                            );
+                            BindUtils.postNotifyChange(
+                                    null,
+                                    null,
+                                    fileMetaData,
+                                    "fileMetaMap");
+                            HashMap<String, List<String>> newInputFileMeta =
+                                    new HashMap<>();
+                            if (fileMetaData.getFileMetaMap().keySet()
+                                    .size() == 1) {
+
+                                templateTableBean.setTable(
+                                        table((String) fileMetaData
+                                                .getFileMetaMap()
+                                                .keySet()
+                                                .toArray()[0])
+                                );
+                                try {
+                                    newInputFileMeta.put(FilenameUtils
+                                                    .removeExtension(media.getName()),
+                                            resultsList.get(0));
+                                    fileMetaData.setInputFileMeta(
+                                            newInputFileMeta);
+                                    BindUtils.postNotifyChange(null, null,
+                                            fileMetaData, "inputFileMeta");
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            } else if (!fileMetaData.getJoinDone()) {
+                                fileMetaData.setInputFileMeta(
+                                        newInputFileMeta);
+                                BindUtils.postNotifyChange(null, null,
+                                        fileMetaData, "inputFileMeta");
+
+                                templateTableBean.removeAllColumns();
+                                templateTableBean.updateTemplateTable();
+                                BindUtils.postNotifyChange(
+                                        null,
+                                        null,
+                                        templateTableBean,
+                                        "*"
+                                );
+                            }
+
+                            noFilesCheck = false;
+                        }
+                    }
+                }
+
+                Messagebox.show(returnMessage);
+            } catch (IOException e) {
+                System.out.println("===> Error! 1");
+                e.printStackTrace();
+            } catch (IllegalFileTypeException e) {
+                System.out.println("===> Error! 2");
+                e.printStackTrace();
+                Messagebox.show(e.getMessage());
+            } catch (NullPointerException e) {
+                System.out.println("===> Error! 3");
+                e.printStackTrace();
+            }
+
         } else {
             System.out.println("===> Error! 4");
             Messagebox.show(

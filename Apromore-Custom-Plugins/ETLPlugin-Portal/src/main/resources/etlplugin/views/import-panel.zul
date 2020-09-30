@@ -52,6 +52,8 @@
 <!--                        mold="trendy" hflex="1"-->
 <!--                    />-->
 
+                    <include src="/etlplugin/views/upload-button.zul"/>
+
                     <space/>
 
                     <label sclass="heading" value="Tables"/>

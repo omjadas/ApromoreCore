@@ -118,7 +118,7 @@ public class ImpalaTable {
             tableName + "_csv",
             columns.substring(0, columns.length() - 2),
             dir);
-
+        
         impalaJdbcAdaptor.createTable(create, tableName + "_csv");
 
         // Create File in Parquet format

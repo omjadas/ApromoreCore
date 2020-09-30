@@ -41,6 +41,7 @@ import org.zkoss.zul.Fileupload;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zul.Messagebox;
 
+import javax.print.attribute.standard.NumberUp;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -96,9 +97,19 @@ public class FileUploadViewModel {
         System.out.println("===> Click upload");
         Media[] medias = null;
         try {
-            medias = Fileupload.get(MAX_FILES_NUMBER);
+//            for(int i = 0 ; i < 1; i++) {
+//                int j = 10000000;
+//                while (--j > 0);
+//                medias = Fileupload.get(MAX_FILES_NUMBER);
+//                int asd = medias.length;
+//            }
+            while(medias != null) {
+                medias = Fileupload.get(MAX_FILES_NUMBER);
+                int j = 10000000;
+                while (--j > 0);
+            }
         } catch (Exception e) {
-            System.out.println("===>");
+            System.out.println("===> error in fileupload");
             e.printStackTrace();
         }
 
@@ -108,8 +119,14 @@ public class FileUploadViewModel {
             System.out.println("===> Media is null");
         }
 
-        fileHandlerService.test();
-        transaction.test();
+        try {
+            fileHandlerService.test();
+            transaction.test();
+        } catch (NullPointerException e) {
+            System.out.println("===> service null pointer.");
+            e.printStackTrace();
+        }
+
         if (medias != null && medias.length > 0 && medias.length <= 10) {
             String returnMessage;
 
