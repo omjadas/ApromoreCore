@@ -1,0 +1,76 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Wait for existing deployments to finish
+        uses: softprops/turnstyle@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Start deployment
+        uses: bobheadxi/deployments@master
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: master
+      - name: Install SSH keys
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+      - name: Pull Docker images
+        run: docker pull -a ${{ secrets.DOCKER_REPO }}
+      - name: Build and push Docker image (caddy)
+        uses: docker/build-push-action@v1.1.0
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ secrets.DOCKER_REPO }}
+          dockerfile: Dockerfile.caddy
+          tags: caddy
+          cache_froms: ${{ secrets.DOCKER_REPO }}:caddy
+      - name: Build and push Docker image (build)
+        uses: docker/build-push-action@v1.1.0
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ secrets.DOCKER_REPO }}
+          tags: build
+          target: build
+          cache_froms: ${{ secrets.DOCKER_REPO }}:build
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v1.1.0
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ secrets.DOCKER_REPO }}
+          tags: latest
+          cache_froms: ${{ secrets.DOCKER_REPO }}:build,${{ secrets.DOCKER_REPO }}:latest
+      - name: Deploy
+        env:
+          DOCKER_HOST: "${{ secrets.DOCKER_HOST }}"
+          BASIC_AUTH_USERNAME: "${{ secrets.BASIC_AUTH_USERNAME }}"
+          BASIC_AUTH_PASSWORD_HASH: "${{ secrets.BASIC_AUTH_PASSWORD_HASH }}"
+        run: |
+          docker-compose -f docker-compose.yml -f docker-compose.prod.yml pull && \
+          docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --force-recreate --remove-orphans -d && \
+          docker image prune -f
+      - name: Update deployment status
+        uses: bobheadxi/deployments@master
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}

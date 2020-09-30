@@ -1,0 +1,9 @@
+**/target
+Dockerfile.*
+docker-compose.*.yml
+.dockerignore
+/Apromore-Assembly/virgo-tomcat-server-3.6.4.RELEASE
+.vscode
+.settings
+.project
+.github

@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  apromore:
+    restart: always
+
+  db:
+    restart: always
+
+  impala:
+    restart: always
+
+  caddy:
+    image: omjadas/apromore:caddy
+    depends_on:
+      - apromore
+    environment:
+      - BASIC_AUTH_USERNAME
+      - BASIC_AUTH_PASSWORD_HASH
+    volumes:
+      - caddy_config:/config
+      - caddy_data:/data
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+
+volumes:
+  caddy_config:
+  caddy_data:
