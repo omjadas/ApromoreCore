@@ -5,6 +5,8 @@ services:
     build: .
     ports:
       - "9000:9000"
+    volumes:
+      - apromore:/apromore
 
   db:
     ports:
@@ -14,5 +16,11 @@ services:
     ports:
       - "21050:21050"
 
+  logs:
+    image: alpine:3
+    command: tail -F /apromore/serviceability/logs/log.log
+    volumes:
+      - apromore:/apromore
+
 volumes:
-  preprocess-data:
+  apromore:
