@@ -43,16 +43,18 @@
 <!--                    <button apply="org.apromore.etlplugin.portal.viewModels.ButtonUploadController" id="btnUpload" label="Upload"-->
 <!--                        mold="trendy" hflex="1"-->
 <!--                    />-->
-                    <button id="btnUploaddded" label="Upload"
-                        onClick="@command('onFileUpload')"
-                        mold="trendy" hflex="1"
-                    />
-
-<!--                    <button apply="org.apromore.etlplugin.portal.viewModels.ButtonUploadController" id="buttnUpload" label="Upload"-->
+<!--                    <button id="btnUploaddded" label="Upload"-->
+<!--                        onClick="@command('onFileUpload')"-->
 <!--                        mold="trendy" hflex="1"-->
 <!--                    />-->
 
-                    <include src="/etlplugin/views/upload-button.zul"/>
+<!--                    <button id="uploadButton"  label="Upload"-->
+<!--                        mold="trendy" hflex="1"-->
+<!--                    />-->
+
+                    <button id="fileUploadButton" label="Upload File" upload="true,multiple=true" onUpload="@command('onFileUpload', event=event)" mold="trendy" hflex="1"/>
+
+<!--                    <include src="/etlplugin/views/upload-button.zul"/>--><!--                    <include src="/etlplugin/views/upload-button.zul"/>-->
 
                     <space/>
 

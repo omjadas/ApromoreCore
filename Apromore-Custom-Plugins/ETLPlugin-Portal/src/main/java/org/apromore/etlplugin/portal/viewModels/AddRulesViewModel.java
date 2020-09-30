@@ -21,10 +21,12 @@
  */
 package org.apromore.etlplugin.portal.viewModels;
 
+import org.apromore.etlplugin.portal.ETLPluginPortal;
 import org.apromore.etlplugin.portal.models.templateTableModel.*;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Messagebox;
@@ -32,6 +34,7 @@ import org.zkoss.zul.Messagebox;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * View model for add rules modal.
@@ -40,7 +43,6 @@ import java.util.List;
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class AddRulesViewModel {
 
-    @WireVariable
     private TemplateTableBean templateTableBean;
     private Column column;
     private boolean newColumn = false;
@@ -84,6 +86,12 @@ public class AddRulesViewModel {
             elseCase.setOperation(operation);
         } else {
             elseCase = new Else();
+        }
+        if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
+                .SESSION_ATTRIBUTE_KEY)) != null) {
+            templateTableBean = (TemplateTableBean) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("templateTableBean");
         }
     }
 

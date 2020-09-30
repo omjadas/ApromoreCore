@@ -26,7 +26,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:osgi="http://www.springframework.org/schema/osgi"
        xmlns:osgi-compendium="http://www.springframework.org/schema/osgi-compendium"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/c"
        xsi:schemaLocation="
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
@@ -37,12 +37,19 @@
             http://www.springframework.org/schema/osgi-compendium
             http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
 
+    <!-- BEANS: ETL plugin Logic -->
+    <bean id="impalaJdbcAdaptor" class="org.apromore.etlplugin.logic.services.impl.ImpalaJdbcAdaptor"/>
+    <bean id="impalaTable" class="org.apromore.etlplugin.logic.services.impl.ImpalaTable">
+        <property name="impalaJdbcAdaptor" ref="impalaJdbcAdaptor"/>
+    </bean>
+    <bean id="transactionImpl" class="org.apromore.etlplugin.logic.services.impl.TransactionImpl">
+        <property name="impalaJdbcAdaptor" ref="impalaJdbcAdaptor"/>
+        <property name="impalaTable" ref="impalaTable"/>
+    </bean>
+
     <!-- SERVICE: ETL plugin Logic -->
+    <osgi:service ref="transactionImpl" interface="org.apromore.etlplugin.logic.services.Transaction"/>
     <osgi:service interface="org.apromore.etlplugin.logic.services.FileHandlerService">
         <bean class="org.apromore.etlplugin.logic.services.impl.FileHandlerServiceImpl"/>
-    </osgi:service>
-
-    <osgi:service interface="org.apromore.etlplugin.logic.services.Transaction">
-        <bean class="org.apromore.etlplugin.logic.services.impl.TransactionImpl"/>
     </osgi:service>
 </beans>

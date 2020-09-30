@@ -42,7 +42,6 @@ import static org.jooq.impl.DSL.using;
 /**
  * The ColumnsData Bean.
  */
-@Component
 public class TemplateTableBean implements InitializingBean {
 
     private Transaction transaction;

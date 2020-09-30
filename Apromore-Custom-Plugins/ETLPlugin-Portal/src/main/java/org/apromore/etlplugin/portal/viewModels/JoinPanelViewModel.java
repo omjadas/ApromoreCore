@@ -58,16 +58,11 @@ public class JoinPanelViewModel {
     private List<JoinQueryModel> joinQueryModels;
     private List<String> joins;
     private static final int LIMIT = 50;
+
     private Transaction transaction;
     private FileHandlerService fileHandlerService;
-
-    @WireVariable
     private FileMetaData fileMetaData;
-
-    @WireVariable
     private TemplateTableBean templateTableBean;
-
-    @WireVariable
     private Join join;
 
     /**
@@ -83,7 +78,17 @@ public class JoinPanelViewModel {
             transaction = (Transaction) ((Map) Sessions.getCurrent()
                     .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
                     .get("transaction");
+            fileMetaData = (FileMetaData) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileMetaData");
+            templateTableBean = (TemplateTableBean) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("templateTableBean");
+            join = (Join) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("join");
         }
+
 
         joinQueryModels = new ArrayList<JoinQueryModel>();
         joins = new ArrayList<String>();

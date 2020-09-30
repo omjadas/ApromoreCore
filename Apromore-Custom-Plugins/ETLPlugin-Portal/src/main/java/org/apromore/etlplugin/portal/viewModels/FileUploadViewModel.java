@@ -26,10 +26,12 @@ import org.apromore.etlplugin.logic.services.FileHandlerService;
 import org.apromore.etlplugin.logic.services.Transaction;
 import org.apromore.etlplugin.logic.services.impl.IllegalFileTypeException;
 import org.apromore.etlplugin.portal.ETLPluginPortal;
+import org.apromore.etlplugin.portal.models.joinTableModel.Join;
 import org.apromore.etlplugin.portal.models.sidePanelModel.FileMetaData;
 import org.apromore.etlplugin.portal.models.templateTableModel.TemplateTableBean;
 import org.jooq.conf.ParamType;
 import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -62,12 +64,9 @@ public class FileUploadViewModel {
 
     private FileHandlerService fileHandlerService;
     private Transaction transaction;
-
-    @WireVariable
     private FileMetaData fileMetaData;
-
-    @WireVariable
     private TemplateTableBean templateTableBean;
+    private Join join;
 
     /**
      * Initialise.
@@ -82,6 +81,15 @@ public class FileUploadViewModel {
             transaction = (Transaction) ((Map) Sessions.getCurrent()
                     .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
                     .get("transaction");
+            fileMetaData = (FileMetaData) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileMetaData");
+            templateTableBean = (TemplateTableBean) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("templateTableBean");
+            join = (Join) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("join");
         }
 
         noFilesCheck = true;
@@ -92,40 +100,9 @@ public class FileUploadViewModel {
      */
     @NotifyChange("noFilesCheck")
     @Command("onFileUpload")
-    public void onFileUpload() {
+    public void onFileUpload(@BindingParam("event") UploadEvent event) {
 
-        System.out.println("===> Click upload");
-        Media[] medias = null;
-        try {
-//            for(int i = 0 ; i < 1; i++) {
-//                int j = 10000000;
-//                while (--j > 0);
-//                medias = Fileupload.get(MAX_FILES_NUMBER);
-//                int asd = medias.length;
-//            }
-            while(medias != null) {
-                medias = Fileupload.get(MAX_FILES_NUMBER);
-                int j = 10000000;
-                while (--j > 0);
-            }
-        } catch (Exception e) {
-            System.out.println("===> error in fileupload");
-            e.printStackTrace();
-        }
-
-        if (medias != null) {
-            System.out.println("===> Media size: " + medias.length);
-        } else {
-            System.out.println("===> Media is null");
-        }
-
-        try {
-            fileHandlerService.test();
-            transaction.test();
-        } catch (NullPointerException e) {
-            System.out.println("===> service null pointer.");
-            e.printStackTrace();
-        }
+        Media[] medias = event.getMedias();
 
         if (medias != null && medias.length > 0 && medias.length <= 10) {
             String returnMessage;

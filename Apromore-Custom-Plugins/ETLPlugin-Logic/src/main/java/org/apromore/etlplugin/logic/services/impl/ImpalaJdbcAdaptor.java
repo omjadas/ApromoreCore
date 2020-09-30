@@ -30,7 +30,6 @@ import java.util.List;
 /**
  * Impala JDBC Adaptor class to connect and execute queries.
  */
-@Component
 public class ImpalaJdbcAdaptor {
     // Impala connection info
     private final String connectionUrl = System.getenv("IMPALA_LINK");
@@ -67,7 +66,7 @@ public class ImpalaJdbcAdaptor {
     public void createTable(String create, String tableName)
             throws SQLException {
         String drop = "DROP TABLE IF EXISTS " + tableName;
-
+        System.out.println("===> connectionUrl: " + connectionUrl);
         try {
             Class.forName(jdbcDriverName);
             try (
@@ -76,7 +75,9 @@ public class ImpalaJdbcAdaptor {
                 Statement statement = connection.createStatement();
             ) {
                 // Import table
+                System.out.println("==> drop");
                 statement.execute(drop);
+                System.out.println("==> create table");
                 statement.execute(create);
             }
         } catch (ClassNotFoundException e) {

@@ -40,8 +40,10 @@ public class FileHandlerServiceImpl implements FileHandlerService {
     private static final int BUFFER_SIZE = 1024;
     private static final String UPLOAD_FAILED = "Upload Failed";
     private static final String UPLOAD_SUCCESS = "Upload Success";
-    private String tempDir = System.getProperty("java.io.tmpdir") +
+    private String tempDir = "/tmp" +
         System.getenv("DATA_STORE");
+//    private String tempDir = System.getProperty("java.io.tmpdir") +
+//        System.getenv("DATA_STORE");
 
     public void test() {
         System.out.println("===> File handler called.");

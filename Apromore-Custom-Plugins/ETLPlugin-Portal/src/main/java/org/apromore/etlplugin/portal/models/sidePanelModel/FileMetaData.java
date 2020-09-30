@@ -34,7 +34,6 @@ import java.util.List;
 /**
  * A class containing the file meta data.
  */
-@Component
 public class FileMetaData {
 
     private HashMap<String, List<String>> inputFileMeta;

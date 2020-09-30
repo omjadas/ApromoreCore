@@ -25,6 +25,9 @@ import java.util.*;
 
 import org.apromore.etlplugin.logic.services.FileHandlerService;
 import org.apromore.etlplugin.logic.services.Transaction;
+import org.apromore.etlplugin.portal.models.joinTableModel.Join;
+import org.apromore.etlplugin.portal.models.sidePanelModel.FileMetaData;
+import org.apromore.etlplugin.portal.models.templateTableModel.TemplateTableBean;
 import org.apromore.plugin.portal.DefaultPortalPlugin;
 import org.apromore.plugin.portal.PortalContext;
 import org.slf4j.Logger;
@@ -44,6 +47,10 @@ public class ETLPluginPortal extends DefaultPortalPlugin {
 
     @Inject private FileHandlerService fileHandlerService;
     @Inject private Transaction transaction;
+    @Inject private FileMetaData fileMetaData;
+    @Inject private TemplateTableBean templateTableBean;
+    @Inject private Join join;
+
     private static Logger LOGGER = LoggerFactory
             .getLogger(ETLPluginPortal.class);
     private String label = "ETLPlugin";
@@ -66,6 +73,18 @@ public class ETLPluginPortal extends DefaultPortalPlugin {
      */
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
+    }
+
+    public void setFileMetaData(FileMetaData fileMetaData) {
+        this.fileMetaData = fileMetaData;
+    }
+
+    public void setTemplateTableBean(TemplateTableBean templateTableBean) {
+        this.templateTableBean = templateTableBean;
+    }
+
+    public void setJoin(Join join) {
+        this.join = join;
     }
 
     /**
@@ -112,6 +131,10 @@ public class ETLPluginPortal extends DefaultPortalPlugin {
         Map etlLogicBeanMap = new HashMap<>();
         etlLogicBeanMap.put("fileHandlerService", fileHandlerService);
         etlLogicBeanMap.put("transaction", transaction);
+        etlLogicBeanMap.put("fileMetaData", fileMetaData);
+        etlLogicBeanMap.put("templateTableBean", templateTableBean);
+        etlLogicBeanMap.put("join", join);
+
         Sessions.getCurrent().setAttribute(
             ETLPluginPortal.SESSION_ATTRIBUTE_KEY, etlLogicBeanMap
         );

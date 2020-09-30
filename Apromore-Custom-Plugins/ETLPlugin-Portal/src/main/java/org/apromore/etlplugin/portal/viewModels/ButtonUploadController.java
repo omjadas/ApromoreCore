@@ -62,11 +62,7 @@ public class ButtonUploadController {
 
     private FileHandlerService fileHandlerService;
     private Transaction transaction;
-
-    @WireVariable
     private FileMetaData fileMetaData;
-
-    @WireVariable
     private TemplateTableBean templateTableBean;
 
     /**
@@ -82,7 +78,14 @@ public class ButtonUploadController {
             transaction = (Transaction) ((Map) Sessions.getCurrent()
                     .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
                     .get("transaction");
+            fileMetaData = (FileMetaData) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileMetaData");
+            templateTableBean = (TemplateTableBean) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("templateTableBean");
         }
+
 
         noFilesCheck = true;
     }
@@ -90,7 +93,6 @@ public class ButtonUploadController {
     /**
      * Describes the actions taken when a file is uploaded.
      */
-//    @Listen("onUpload = uploadButtonmvc")
     @Command("onFileUpload")
     public void onFileUpload(@BindingParam("event") UploadEvent event) {
 

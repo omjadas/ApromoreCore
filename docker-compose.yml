@@ -1,14 +1,17 @@
-version: "3.8"
+version: "3.7"
 
 services:
   apromore:
     image: omjadas/apromore:latest
     environment:
       IMPALA_LINK: jdbc:impala://impala:21050
+      DATA_STORE: /etl_data
       JAVA_OPTS: -server -Xmx8g -Xmn1g
     depends_on:
       - db
       - impala
+    volumes:
+      - etl-data:/tmp/etl_data
 
   db:
     image: mysql:5
@@ -22,8 +25,8 @@ services:
   impala:
     image: apache/kudu:impala-latest
     volumes:
-      - preprocess-data:/tmp/preprocess_data
+      - /tmp/etl_data:/tmp/etl_data
     command: impala
 
 volumes:
-  preprocess-data:
+  etl-data:
