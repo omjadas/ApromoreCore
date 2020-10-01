@@ -4,8 +4,10 @@ services:
   apromore:
     build: .
     ports:
-      - "9000:13000"
-
+      - "9000:9000"
+    volumes:
+      - apromore:/apromore
+      
   db:
     ports:
       - "3306:3306"
@@ -14,5 +16,11 @@ services:
     ports:
       - "21050:21050"
 
+  logs:
+    image: alpine:3
+    command: tail -F /apromore/serviceability/logs/log.log
+    volumes:
+      - apromore:/apromore
+
 volumes:
-  etl-data:
+  apromore:

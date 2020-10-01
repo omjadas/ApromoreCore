@@ -25,7 +25,7 @@ services:
   impala:
     image: apache/kudu:impala-latest
     volumes:
-      - /tmp/etl_data:/tmp/etl_data
+      - etl-data:/tmp/etl_data
     command: impala
 
 volumes:
