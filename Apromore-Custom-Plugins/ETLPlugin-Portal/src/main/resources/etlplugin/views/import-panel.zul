@@ -32,7 +32,7 @@
                 <vlayout apply="org.zkoss.bind.BindComposer"
                             viewModel="@id('vm_fileUpload') @init('org.apromore.etlplugin.portal.viewModels.FileUploadViewModel')">
                     <!-- Left panel section -->
-                    <button id="fileUploadButton" label="Upload File" upload="true,multiple=true" onUpload="@command('onFileUpload', event=event)" mold="trendy" hflex="1"/>
+                    <button id="fileUploadButton" label="Upload File" upload="true,maxsize=-1,multiple=true" onUpload="@command('onFileUpload', event=event)" mold="trendy" hflex="1"/>
 
                     <space/>
 
