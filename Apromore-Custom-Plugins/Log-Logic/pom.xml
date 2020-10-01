@@ -27,6 +27,7 @@
                 <configuration>
                     <instructions>
                         <Import-Package>
+                            !org.apache.hive.service.cli.thrift,
                             org.springframework.beans.factory.aspectj,
                             *
                         </Import-Package>

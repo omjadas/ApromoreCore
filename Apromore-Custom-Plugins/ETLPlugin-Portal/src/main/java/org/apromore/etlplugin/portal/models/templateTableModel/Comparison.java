@@ -21,11 +21,15 @@
  */
 package org.apromore.etlplugin.portal.models.templateTableModel;
 
+import org.apromore.etlplugin.portal.ETLPluginPortal;
 import org.apromore.etlplugin.portal.models.sidePanelModel.FileMetaData;
 import org.apromore.etlplugin.portal.utils.SpringBeanContext;
 import org.apromore.etlplugin.portal.utils.StringUtils;
 import org.jooq.Condition;
 import org.jooq.Field;
+import org.zkoss.zk.ui.Sessions;
+
+import java.util.Map;
 
 import static org.jooq.impl.DSL.*;
 
@@ -55,8 +59,9 @@ public class Comparison {
      * Constructor to initialise the fileMetaData.
      */
     public Comparison() {
-        fileMetaData = SpringBeanContext
-                .getBean(FileMetaData.class);
+        fileMetaData = (FileMetaData) ((Map) Sessions.getCurrent()
+                .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                .get("fileMetaData");
     }
 
     private boolean isString(String column) {

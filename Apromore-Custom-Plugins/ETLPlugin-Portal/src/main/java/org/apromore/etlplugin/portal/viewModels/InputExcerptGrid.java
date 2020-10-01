@@ -58,18 +58,22 @@ public class InputExcerptGrid {
     @Init
     public void init(@BindingParam("filename") String filename) {
         try {
-            transaction = (Transaction) ((Map) Sessions.getCurrent()
-                .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-                .get("transaction");
-            resultList = transaction.executeQuery(
-                    select(field("*"))
-                            .from(filename)
-                            .limit(50)
-                            .getSQL(ParamType.INLINED),
-                    false
-            );
-            columnsList = resultList.get(0);
-            resultList.remove(0);
+            if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
+                    .SESSION_ATTRIBUTE_KEY)) != null) {
+                transaction = (Transaction) ((Map) Sessions.getCurrent()
+                        .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                        .get("transaction");
+                resultList = transaction.executeQuery(
+                        select(field("*"))
+                                .from(filename)
+                                .limit(50)
+                                .getSQL(ParamType.INLINED),
+                        false
+                );
+                columnsList = resultList.get(0);
+                resultList.remove(0);
+            }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

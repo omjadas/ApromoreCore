@@ -20,22 +20,22 @@
   #L%
   -->
 <?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>
-<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>
-<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>
-<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>
-<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>
-<?script src="../../themes/ap/common/js/index.js"?>
+<!--<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>-->
+<!--<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>-->
+<!--<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>-->
+<!--<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>-->
+<!--<?script src="../../themes/ap/common/js/index.js"?>-->
 <zk>
     <window sclass="card" vflex="10" apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm_transformPanel') @init('org.apromore.etlplugin.portal.viewModels.TransformPanelViewModel')">
         <hlayout sclass="right-align">
             <button label="Export" onClick="@command('exportTransformParquet')"
-                    visible="@load(templateTableBean.tableVisible)"/>
+                    visible="@load(vm_transformPanel.templateTableBean.tableVisible)"/>
         </hlayout>
         <grid fulfill="self.onCreate" id="templateTable" sclass="consolidated-excerpt-grid"
-              sizedByContent="true" model="@load(templateTableBean.templateTable)" vflex="100"
-                visible="@load(templateTableBean.tableVisible)">
-            <columns children="@load(templateTableBean.columns)">
+              sizedByContent="true" model="@load(vm_transformPanel.templateTableBean.templateTable)" vflex="100"
+                visible="@load(vm_transformPanel.templateTableBean.tableVisible)">
+            <columns children="@load(vm_transformPanel.templateTableBean.columns)">
                 <template name="children" var="column">
                     <column align="center">
                         <vlayout>

@@ -44,8 +44,8 @@ public class FileMetaData {
     // List of imported columns.
     private List<Column> columns;
 
-    @Value("${some.key:false}")
-    private Boolean joinDone;
+//    @Value("${some.key:false}")
+    private Boolean joinDone = false;
 
     /**
      * Get the file meta map.

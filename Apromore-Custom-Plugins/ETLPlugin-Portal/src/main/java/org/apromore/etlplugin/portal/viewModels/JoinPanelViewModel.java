@@ -65,6 +65,7 @@ public class JoinPanelViewModel {
     private TemplateTableBean templateTableBean;
     private Join join;
 
+
     /**
      * Initialise.
      */
@@ -97,6 +98,10 @@ public class JoinPanelViewModel {
         }
 
         joinQueryModels.add(new JoinQueryModel());
+    }
+
+    public FileMetaData getFileMetaData() {
+        return fileMetaData;
     }
 
     /**

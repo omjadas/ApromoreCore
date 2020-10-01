@@ -19,14 +19,14 @@
   <http://www.gnu.org/licenses/lgpl-3.0.html>.
   #L%
   -->
+<?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>
 <?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>
 <?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>
 <?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>
 <?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>
 <?script src="../../themes/ap/common/js/index.js"?>
-<?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<zk xmlns:h="native">
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
 <!--    <style src="../css/multi-event-log-plugin.css"/>-->
     <tabbox height="100%" apply="org.zkoss.bind.BindComposer"
             onSelect="@global-command('newTabSelected', tabPanelId=self.getSelectedPanel().getId())">
@@ -67,7 +67,7 @@
                            visible="@load(vm_fileUpload.noFilesCheck)"
                     />
 
-                    <div children="@load(fileMetaData.fileMetaMap.keySet())"
+                    <div children="@load(vm_fileUpload.fileMetaData.fileMetaMap.keySet())"
                          id="inputFileList" sclass="file-list-div" hflex="1"
                          fulfill="self.onCreate"
                     >
@@ -86,7 +86,7 @@
                                     </div>
                                     <div id="scroll_area_${filename}"
                                          sclass="input-table-scroll-area">
-                                        <include src="etlplugin/views/input-excerpt.zul" filename="${filename}"/>
+                                        <include src="views/input-excerpt.zul" filename="${filename}"/>
                                     </div>
                                 </popup>
                                 <space spacing="3px"/>
@@ -110,7 +110,7 @@
                     <space/>
 
                     <tree fulfill="self.onCreate" id="tree" hflex="1" style="overflow: auto" nonselectableTags="*">
-                        <treechildren children="@load(fileMetaData.inputFileMeta.entrySet())">
+                        <treechildren children="@load(vm_transform.fileMetaData.inputFileMeta.entrySet())">
                             <template name="children" var="tableName">
                                 <treeitem >
 

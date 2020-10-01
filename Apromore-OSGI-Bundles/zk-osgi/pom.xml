@@ -51,6 +51,7 @@
                             !org.zkoss.zkex.theme,
                             !org.zkoss.zkmax.theme,
                             !org.zkoss.zsoup.*,
+                            !org.apache.hive.service.cli.thrift,
                             *
                         </Import-Package>
                         <DynamicImport-Package>

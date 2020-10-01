@@ -1496,44 +1496,44 @@
                 </execution>
             </executions>
         </plugin>
-<!--        <plugin>-->
-<!--            <groupId>org.apache.maven.plugins</groupId>-->
-<!--            <artifactId>maven-enforcer-plugin</artifactId>-->
-<!--            <version>${maven.enforcer.plugin}</version>-->
-<!--            <executions>-->
-<!--                <execution>-->
-<!--                    <id>enforce-banned-dependencies</id>-->
-<!--                    <goals>-->
-<!--                        <goal>enforce</goal>-->
-<!--                    </goals>-->
-<!--                    <configuration>-->
-<!--                        <rules>-->
-<!--                            <bannedDependencies>-->
-<!--                                <searchTransitive>true</searchTransitive>-->
-<!--                                <excludes>-->
-<!--                                    <exclude>commons-logging</exclude>-->
-<!--                                    <exclude>org.apache.commons:com.springsource.org.apache.commons.logging</exclude>-->
-<!--                                    <exclude>aspectj:aspectj*</exclude>-->
-<!--                                    <exclude>hsqldb:hsqldb</exclude>-->
-<!--                                    &lt;!&ndash;<exclude>log4j:log4j</exclude> &ndash;&gt;-->
-<!--                                    <exclude>org.slf4j:1.5*</exclude>-->
-<!--                                    <exclude>org.springframework:2.*</exclude>-->
-<!--                                    <exclude>org.springframework:3.0.*</exclude>-->
-<!--                                    <exclude>org.springframework:spring-*</exclude>-->
-<!--                                </excludes>-->
-<!--                            </bannedDependencies>-->
-<!--                            <requireMavenVersion>-->
-<!--                                <version>${maven.version.range}</version>-->
-<!--                            </requireMavenVersion>-->
-<!--                            <requireJavaVersion>-->
-<!--                                <version>${java.source.version}</version>-->
-<!--                            </requireJavaVersion>-->
-<!--                        </rules>-->
-<!--                        <fail>true</fail>-->
-<!--                    </configuration>-->
-<!--                </execution>-->
-<!--            </executions>-->
-<!--        </plugin>-->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <version>${maven.enforcer.plugin}</version>
+            <executions>
+                <execution>
+                    <id>enforce-banned-dependencies</id>
+                    <goals>
+                        <goal>enforce</goal>
+                    </goals>
+                    <configuration>
+                        <rules>
+                            <bannedDependencies>
+                                <searchTransitive>true</searchTransitive>
+                                <excludes>
+                                    <exclude>commons-logging</exclude>
+                                    <exclude>org.apache.commons:com.springsource.org.apache.commons.logging</exclude>
+                                    <exclude>aspectj:aspectj*</exclude>
+                                    <exclude>hsqldb:hsqldb</exclude>
+                                    <!--<exclude>log4j:log4j</exclude> -->
+                                    <exclude>org.slf4j:1.5*</exclude>
+                                    <exclude>org.springframework:2.*</exclude>
+                                    <exclude>org.springframework:3.0.*</exclude>
+                                    <exclude>org.springframework:spring-*</exclude>
+                                </excludes>
+                            </bannedDependencies>
+                            <requireMavenVersion>
+                                <version>${maven.version.range}</version>
+                            </requireMavenVersion>
+                            <requireJavaVersion>
+                                <version>${java.source.version}</version>
+                            </requireJavaVersion>
+                        </rules>
+                        <fail>true</fail>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>

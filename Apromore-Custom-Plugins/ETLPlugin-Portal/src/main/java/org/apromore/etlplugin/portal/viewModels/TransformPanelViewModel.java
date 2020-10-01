@@ -55,6 +55,14 @@ public class TransformPanelViewModel {
     private FileMetaData fileMetaData;
     private TemplateTableBean templateTableBean;
 
+    public FileMetaData getFileMetaData() {
+        return fileMetaData;
+    }
+
+    public TemplateTableBean getTemplateTableBean() {
+        return templateTableBean;
+    }
+
     /**
      * Initialise.
      */

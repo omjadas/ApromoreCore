@@ -20,11 +20,11 @@
   #L%
   -->
 <?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>
-<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>
-<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>
-<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>
-<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>
-<?script src="../../themes/ap/common/js/index.js"?>
+<!--<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>-->
+<!--<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>-->
+<!--<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>-->
+<!--<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>-->
+<!--<?script src="../../themes/ap/common/js/index.js"?>-->
 <zk>
     <window title="@load(vm.title)" border="normal" width="70%" mode="modal"
         apply="org.zkoss.bind.BindComposer" id="addRulesModal" contentStyle="overflow:auto"
@@ -49,7 +49,7 @@
                             <hlayout>
                                 <button label="x" onClick="@command('removeIfCase', index=forEachStatus.index)"
                                 sclass="redButton"/>
-                                <include ifElseCase="@load(each)" src="@load('etlplugin/views/if-condition-view.zul')"/>
+                                <include ifElseCase="@load(each)" src="@load('/etlplugin/views/if-condition-view.zul')"/>
                             </hlayout>
                         </cell>
                     </row>
@@ -60,7 +60,7 @@
                             <hlayout>
                                 <button label="x" onClick="@command('removeElseCase')"
                                 sclass="redButton"/>
-                                <include ifElseCase="@load(each)" src="@load('etlplugin/views/else-condition-view.zul')"/>
+                                <include ifElseCase="@load(each)" src="@load('/etlplugin/views/else-condition-view.zul')"/>
                             </hlayout>
                         </cell>
                     </row>

@@ -21,8 +21,6 @@
  */
 package org.apromore.etlplugin.logic.services.impl;
 
-import org.springframework.stereotype.Component;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +128,9 @@ public class ImpalaJdbcAdaptor {
 
                     resultList.add(rowList);
                 }
+
+                System.out.println(sqlStatement);
+                System.out.println(resultList);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

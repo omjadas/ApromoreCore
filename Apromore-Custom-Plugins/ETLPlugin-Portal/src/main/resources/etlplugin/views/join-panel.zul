@@ -20,11 +20,11 @@
   #L%
   -->
 <?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>
-<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>
-<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>
-<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>
-<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>
-<?script src="../../themes/ap/common/js/index.js"?>
+<!--<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>-->
+<!--<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>-->
+<!--<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>-->
+<!--<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>-->
+<!--<?script src="../../themes/ap/common/js/index.js"?>-->
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <zk>
 	<window sclass="card" vflex="6" apply="org.zkoss.bind.BindComposer"
@@ -44,14 +44,14 @@
 				<rows>
 					<template name="model">
 						<row>
-							<combobox model="@load(fileMetaData.fileMetaMap.keySet())"
+							<combobox model="@load(vm_joinPanel.fileMetaData.fileMetaMap.keySet())"
 								selectedItem="@bind(each.selectedTableA)"
 								onSelect="@command('onTableASelected', index=forEachStatus.index)">
 								<template name="model" var="fileName">
 									<comboitem label="@load(fileName)" />
 								</template>
 							</combobox>
-							<combobox model="@load(fileMetaData.fileMetaMap.keySet())"
+							<combobox model="@load(vm_joinPanel.fileMetaData.fileMetaMap.keySet())"
 								selectedItem="@bind(each.selectedTableB)"
 								onSelect="@command('onTableBSelected', index=forEachStatus.index)">
 								<template name="model" var="fileName">

@@ -56,7 +56,7 @@ public class AddRuleButtonViewModel {
     public void openWindow(@BindingParam("colName") Column colName) {
         map.put("colName", colName);
         Window addRulesModal = (Window) Executions.createComponents(
-                "/views/add-rules-modal.zul", null, map);
+                "views/add-rules-modal.zul", null, map);
         addRulesModal.setMode("modal");
         addRulesModal.doModal();
     }

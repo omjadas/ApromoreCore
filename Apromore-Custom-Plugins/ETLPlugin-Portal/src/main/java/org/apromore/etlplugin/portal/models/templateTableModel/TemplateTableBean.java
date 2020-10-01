@@ -42,7 +42,7 @@ import static org.jooq.impl.DSL.using;
 /**
  * The ColumnsData Bean.
  */
-public class TemplateTableBean implements InitializingBean {
+public class TemplateTableBean {
 
     private Transaction transaction;
     private List<Column> columns;
@@ -50,23 +50,28 @@ public class TemplateTableBean implements InitializingBean {
     private Table<?> table;
     private Boolean tableVisible;
 
-    public TemplateTableBean() {
-        if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
-                .SESSION_ATTRIBUTE_KEY)) != null) {
-            transaction = (Transaction) ((Map) Sessions.getCurrent()
-                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-                    .get("transaction");
-        }
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
     }
 
-    /**
-     * Do after bean has been initialised.
-     */
-    @Override
-    public void afterPropertiesSet() throws Exception {
+    public TemplateTableBean() {
+//        if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
+//                .SESSION_ATTRIBUTE_KEY)) != null) {
+//            transaction = (Transaction) ((Map) Sessions.getCurrent()
+//                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+//                    .get("transaction");
+//        }
         columns = new ArrayList<>();
         addPlaceholderColumn();
     }
+
+//    /**
+//     * Do after bean has been initialised.
+//     */
+//    @Override
+//    public void afterPropertiesSet() throws Exception {
+//
+//    }
 
     /**
      * Add Column to Template Table.

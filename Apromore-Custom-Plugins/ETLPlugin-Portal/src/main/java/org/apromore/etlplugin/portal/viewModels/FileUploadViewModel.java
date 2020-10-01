@@ -95,6 +95,14 @@ public class FileUploadViewModel {
         noFilesCheck = true;
     }
 
+    public FileMetaData getFileMetaData() {
+        return fileMetaData;
+    }
+
+    public TemplateTableBean getTemplateTableBean() {
+        return templateTableBean;
+    }
+
     /**
      * Describes the actions taken when a file is uploaded.
      */
