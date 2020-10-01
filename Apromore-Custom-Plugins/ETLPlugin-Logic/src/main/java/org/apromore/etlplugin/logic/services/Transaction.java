@@ -37,7 +37,7 @@ public interface Transaction {
      * @throws IOException  if unable to read file
      */
     void addTable(String fileName) throws IOException, SQLException;
-    void test();
+
     /**
      * Join tables and export.
      *

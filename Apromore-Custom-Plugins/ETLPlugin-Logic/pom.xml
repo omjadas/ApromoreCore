@@ -56,21 +56,6 @@
             <version>${commons-io}</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.zkoss.zk</groupId>-->
-<!--            <artifactId>zkbind</artifactId>-->
-<!--            <version>${zk.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>javax.inject</groupId>-->
-<!--            <artifactId>com.springsource.javax.inject</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apromore</groupId>-->
-<!--            <artifactId>apromore-manager</artifactId>-->
-<!--            <version>1.1</version>-->
-<!--        </dependency>-->
-
         <!-- Impala JDBC dependencies provided by your local repo -->
         <dependency>
             <groupId>com.cloudera.impala.jdbc</groupId>
@@ -105,16 +90,6 @@
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zul</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.thrift</groupId>-->
-<!--            <artifactId>libfb303</artifactId>-->
-<!--            <version>0.9.3</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.thrift</groupId>-->
-<!--            <artifactId>libthrift</artifactId>-->
-<!--            <version>0.12.0</version>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -130,7 +105,6 @@
                             artifactId=ImpalaJDBC41|hive_service|ql|hive_metastore|TCLIServiceClient
                         </Embed-Dependency>
                         <Import-Package>
-<!--                            org.apache.hive.service.cli.thrift,-->
                             !sun.security.jgss,
                             !com.sun.security.auth.module,
                             !com.ibm.security.auth.module,
@@ -148,17 +122,9 @@
                             !javax.security.sasl,
                             !javax.sql,
                             !com.facebook.fb303,
-<!--                            !org.apache.commons.io.input;version="[1.4,2)",-->
-<!--                            !org.apache.commons.io;version="[1.4,2)",-->
-<!--                            !org.apache.hive.service.cli.thrift,-->
-<!--                            !org.apache.thrift.protocol;version="[0.12,1)",-->
-<!--                            !org.apache.thrift.transport;version="[0.12,1)",-->
-<!--                            !org.apache.thrift;version="[0.12,1)",-->
                             !org.apache.zookeeper,
                             !org.apache.zookeeper.data,
-<!--                            !org.apromore.etlplugin.logic.services;version="[1.0,2)",-->
                             !org.ietf.jgss,
-<!--                            !org.zkoss.util.media,-->
                             *
                         </Import-Package>
                         <!-- Export the packages -->

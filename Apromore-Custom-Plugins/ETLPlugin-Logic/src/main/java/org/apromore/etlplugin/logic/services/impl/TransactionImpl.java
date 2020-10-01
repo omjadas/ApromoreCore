@@ -44,10 +44,6 @@ public class TransactionImpl implements Transaction {
         this.impalaTable = impalaTable;
     }
 
-    public void test() {
-        System.out.println("===> Transaction handler called.");
-    }
-
     /**
      * Separate add table method to add tables in Impala.
      *
@@ -58,7 +54,7 @@ public class TransactionImpl implements Transaction {
     @Override
     public void addTable(String fileName) throws IOException, SQLException {
         String tableName = FilenameUtils.removeExtension(fileName);
-        System.out.println("===> Adding table.");
+
         // Adding the file into the Impala as a table
         if (fileName.endsWith(".csv")) {
             impalaTable.createCsvTable(tableName, fileName);
@@ -93,7 +89,7 @@ public class TransactionImpl implements Transaction {
     public List<List<String>> executeQuery(String query, boolean removeHeader)
             throws SQLException {
         List<List<String>> allColumnsRows = impalaJdbcAdaptor.executeQuery(query);
-        System.out.println("===> Executing query.");
+
         if ((allColumnsRows.size() > 0) && removeHeader) {
             allColumnsRows.remove(0);
         }

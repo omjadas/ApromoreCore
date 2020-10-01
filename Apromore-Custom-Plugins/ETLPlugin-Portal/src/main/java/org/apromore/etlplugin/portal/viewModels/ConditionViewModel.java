@@ -72,21 +72,21 @@ public class ConditionViewModel {
             operations.add(type.toString());
         }
 
-        if (fileMetaData != null) {
-            // Prepare the Available Columns
-            for (String tableName : fileMetaData.getInputFileMeta().keySet()) {
-                for (String columnName: fileMetaData.getInputFileMeta()
-                        .get(tableName)) {
-                    columns.add(tableName + "." + columnName);
-                }
-            }
-        }
         if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
                 .SESSION_ATTRIBUTE_KEY)) != null) {
 
             fileMetaData = (FileMetaData) ((Map) Sessions.getCurrent()
                     .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
                     .get("fileMetaData");
+            if (fileMetaData != null) {
+                // Prepare the Available Columns
+                for (String tableName : fileMetaData.getInputFileMeta().keySet()) {
+                    for (String columnName: fileMetaData.getInputFileMeta()
+                            .get(tableName)) {
+                        columns.add(tableName + "." + columnName);
+                    }
+                }
+            }
         }
     }
 

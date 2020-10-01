@@ -121,10 +121,7 @@ public class ImpalaTable {
             columns.substring(0, columns.length() - 2),
             dir);
 
-        System.out.println("===> " + create);
-
         impalaJdbcAdaptor.createTable(create, tableName + "_csv");
-        System.out.println("===> Created");
 
         // Create File in Parquet format
         String query = "CREATE EXTERNAL TABLE `%s` " +
@@ -139,7 +136,6 @@ public class ImpalaTable {
             dataPath + "/" + tableName);
 
         impalaJdbcAdaptor.createTable(query, tableName);
-        System.out.println("===> Converted to parquet");
         impalaJdbcAdaptor.execute(
             String.format(
                 "INSERT OVERWRITE TABLE `%s` SELECT * FROM `%s`",

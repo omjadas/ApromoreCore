@@ -38,12 +38,9 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
-import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zul.Fileupload;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zul.Messagebox;
 
-import javax.print.attribute.standard.NumberUp;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -95,10 +92,20 @@ public class FileUploadViewModel {
         noFilesCheck = true;
     }
 
+    /**
+     * Get the file meta data bean.
+     *
+     * @return the file meta data bean.
+     */
     public FileMetaData getFileMetaData() {
         return fileMetaData;
     }
 
+    /**
+     * Get the template table bean in the view.
+     *
+     * @return the template table bean.
+     */
     public TemplateTableBean getTemplateTableBean() {
         return templateTableBean;
     }
@@ -191,7 +198,6 @@ public class FileUploadViewModel {
                                         "*"
                                 );
                             }
-
                             noFilesCheck = false;
                         }
                     }
@@ -199,19 +205,15 @@ public class FileUploadViewModel {
 
                 Messagebox.show(returnMessage);
             } catch (IOException e) {
-                System.out.println("===> Error! 1");
                 e.printStackTrace();
             } catch (IllegalFileTypeException e) {
-                System.out.println("===> Error! 2");
                 e.printStackTrace();
                 Messagebox.show(e.getMessage());
             } catch (NullPointerException e) {
-                System.out.println("===> Error! 3");
                 e.printStackTrace();
             }
 
         } else {
-            System.out.println("===> Error! 4");
             Messagebox.show(
                 NULL_UPLOAD_MESSAGE,
                 ERROR,

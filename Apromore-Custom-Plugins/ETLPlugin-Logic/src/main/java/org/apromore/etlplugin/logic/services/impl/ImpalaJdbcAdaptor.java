@@ -64,7 +64,7 @@ public class ImpalaJdbcAdaptor {
     public void createTable(String create, String tableName)
             throws SQLException {
         String drop = "DROP TABLE IF EXISTS " + tableName;
-        System.out.println("===> connectionUrl: " + connectionUrl);
+
         try {
             Class.forName(jdbcDriverName);
             try (
@@ -73,9 +73,7 @@ public class ImpalaJdbcAdaptor {
                 Statement statement = connection.createStatement();
             ) {
                 // Import table
-                System.out.println("==> drop");
                 statement.execute(drop);
-                System.out.println("==> create table");
                 statement.execute(create);
             }
         } catch (ClassNotFoundException e) {
@@ -128,9 +126,6 @@ public class ImpalaJdbcAdaptor {
 
                     resultList.add(rowList);
                 }
-
-                System.out.println(sqlStatement);
-                System.out.println(resultList);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

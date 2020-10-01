@@ -19,15 +19,14 @@
   <http://www.gnu.org/licenses/lgpl-3.0.html>.
   #L%
   -->
-<?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>
-<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>
-<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>
-<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>
-<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>
-<?script src="../../themes/ap/common/js/index.js"?>
+<!--&lt;!&ndash;<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>&ndash;&gt;-->
+<!--&lt;!&ndash;<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>&ndash;&gt;-->
+<!--<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>-->
+<!--&lt;!&ndash;<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>&ndash;&gt;-->
+<!--&lt;!&ndash;<?script src="../../themes/ap/common/js/index.js"?>&ndash;&gt;-->
+<!--<?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>-->
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <zk xmlns:h="http://www.w3.org/1999/xhtml">
-<!--    <style src="../css/multi-event-log-plugin.css"/>-->
     <tabbox height="100%" apply="org.zkoss.bind.BindComposer"
             onSelect="@global-command('newTabSelected', tabPanelId=self.getSelectedPanel().getId())">
         <tabs id="joinTabs" width="100%">
@@ -39,22 +38,7 @@
                 <vlayout apply="org.zkoss.bind.BindComposer"
                             viewModel="@id('vm_fileUpload') @init('org.apromore.etlplugin.portal.viewModels.FileUploadViewModel')">
                     <!-- Left panel section -->
-
-<!--                    <button apply="org.apromore.etlplugin.portal.viewModels.ButtonUploadController" id="btnUpload" label="Upload"-->
-<!--                        mold="trendy" hflex="1"-->
-<!--                    />-->
-<!--                    <button id="btnUploaddded" label="Upload"-->
-<!--                        onClick="@command('onFileUpload')"-->
-<!--                        mold="trendy" hflex="1"-->
-<!--                    />-->
-
-<!--                    <button id="uploadButton"  label="Upload"-->
-<!--                        mold="trendy" hflex="1"-->
-<!--                    />-->
-
                     <button id="fileUploadButton" label="Upload File" upload="true,multiple=true" onUpload="@command('onFileUpload', event=event)" mold="trendy" hflex="1"/>
-
-<!--                    <include src="/etlplugin/views/upload-button.zul"/>--><!--                    <include src="/etlplugin/views/upload-button.zul"/>-->
 
                     <space/>
 

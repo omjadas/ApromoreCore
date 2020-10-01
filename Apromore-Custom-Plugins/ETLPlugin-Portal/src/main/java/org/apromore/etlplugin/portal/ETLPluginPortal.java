@@ -75,14 +75,28 @@ public class ETLPluginPortal extends DefaultPortalPlugin {
         this.transaction = transaction;
     }
 
+    /**
+     * Set the file Meta data bean.
+     *
+     * @param fileMetaData is meta data bean.
+     */
     public void setFileMetaData(FileMetaData fileMetaData) {
         this.fileMetaData = fileMetaData;
     }
 
+    /**
+     * Sets the template bean from the bundle context.
+     * @param templateTableBean is template table bean.
+     */
     public void setTemplateTableBean(TemplateTableBean templateTableBean) {
         this.templateTableBean = templateTableBean;
     }
 
+    /**
+     * Set the Join bean from context.
+     *
+     * @param join is the Join table beans.
+     */
     public void setJoin(Join join) {
         this.join = join;
     }

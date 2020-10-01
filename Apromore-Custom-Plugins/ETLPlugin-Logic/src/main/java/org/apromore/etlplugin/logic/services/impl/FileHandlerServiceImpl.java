@@ -42,12 +42,6 @@ public class FileHandlerServiceImpl implements FileHandlerService {
     private static final String UPLOAD_SUCCESS = "Upload Success";
     private String tempDir = "/tmp" +
         System.getenv("DATA_STORE");
-//    private String tempDir = System.getProperty("java.io.tmpdir") +
-//        System.getenv("DATA_STORE");
-
-    public void test() {
-        System.out.println("===> File handler called.");
-    }
 
     /**
      * Create a directory to save the output files to.
@@ -103,7 +97,6 @@ public class FileHandlerServiceImpl implements FileHandlerService {
      * @throws IllegalFileTypeException if file type is not supported
      */
     public String writeFiles(Media[] medias) throws IllegalFileTypeException {
-        System.out.println("===> Start writing file");
         for (int i = 0; i < medias.length; i++) {
             Media media = medias[i];
             String fileName = media.getName();
