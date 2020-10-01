@@ -23,9 +23,6 @@ package org.apromore.etlplugin.logic.services.impl;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apromore.etlplugin.logic.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
@@ -35,13 +32,16 @@ import java.util.List;
 /**
  * Add Table to Impala Handler.
  */
-@Component
 public class ImpalaTable {
-    @Autowired
-    ImpalaJdbcAdaptor impalaJdbcAdaptor;
+
+    private ImpalaJdbcAdaptor impalaJdbcAdaptor;
+
+    public void setImpalaJdbcAdaptor(ImpalaJdbcAdaptor impalaJdbcAdaptor) {
+        this.impalaJdbcAdaptor = impalaJdbcAdaptor;
+    }
 
     // Impala connection info
-    private final String dataPath = System.getProperty("java.io.tmpdir") +
+    private final String dataPath = "/tmp" +
         System.getenv("DATA_STORE");
 
     private String getColumnsFrom(File file) throws IOException {
@@ -134,7 +134,6 @@ public class ImpalaTable {
             dataPath + "/" + tableName);
 
         impalaJdbcAdaptor.createTable(query, tableName);
-
         impalaJdbcAdaptor.execute(
             String.format(
                 "INSERT OVERWRITE TABLE `%s` SELECT * FROM `%s`",

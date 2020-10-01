@@ -21,21 +21,24 @@
  */
 package org.apromore.etlplugin.portal.viewModels;
 
+import org.apromore.etlplugin.portal.ETLPluginPortal;
 import org.apromore.etlplugin.portal.models.sidePanelModel.FileMetaData;
 import org.apromore.etlplugin.portal.models.templateTableModel.*;
 import org.zkoss.bind.annotation.*;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * View model for if and else conditions.
  */
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class ConditionViewModel {
-    @WireVariable
+
     private FileMetaData fileMetaData;
     private List<String> conditions = new ArrayList<>();
     private List<String> operations = new ArrayList<>();
@@ -69,12 +72,19 @@ public class ConditionViewModel {
             operations.add(type.toString());
         }
 
-        if (fileMetaData != null) {
-            // Prepare the Available Columns
-            for (String tableName : fileMetaData.getInputFileMeta().keySet()) {
-                for (String columnName: fileMetaData.getInputFileMeta()
-                        .get(tableName)) {
-                    columns.add(tableName + "." + columnName);
+        if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
+                .SESSION_ATTRIBUTE_KEY)) != null) {
+
+            fileMetaData = (FileMetaData) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileMetaData");
+            if (fileMetaData != null) {
+                // Prepare the Available Columns
+                for (String tableName : fileMetaData.getInputFileMeta().keySet()) {
+                    for (String columnName: fileMetaData.getInputFileMeta()
+                            .get(tableName)) {
+                        columns.add(tableName + "." + columnName);
+                    }
                 }
             }
         }

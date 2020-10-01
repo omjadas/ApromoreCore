@@ -21,14 +21,17 @@
  */
 package org.apromore.etlplugin.portal.models.templateTableModel;
 
+import org.apromore.etlplugin.portal.ETLPluginPortal;
 import org.apromore.etlplugin.portal.models.sidePanelModel.FileMetaData;
 import org.apromore.etlplugin.portal.utils.SpringBeanContext;
 import org.apromore.etlplugin.portal.utils.StringUtils;
 import org.jooq.Field;
 import org.jooq.impl.SQLDataType;
+import org.zkoss.zk.ui.Sessions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.jooq.impl.DSL.*;
 
@@ -62,7 +65,9 @@ public class Operation {
         fields = new ArrayList<>();
         unUsedFields = new ArrayList<>();
         fields.add("");
-        fileMetaData = SpringBeanContext.getBean(FileMetaData.class);
+        fileMetaData = (FileMetaData) ((Map) Sessions.getCurrent()
+                .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                .get("fileMetaData");
     }
 
     private boolean isString(String column) {

@@ -23,7 +23,6 @@ package org.apromore.etlplugin.logic.services.impl;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apromore.etlplugin.logic.services.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -34,11 +33,16 @@ import java.util.List;
  */
 public class TransactionImpl implements Transaction {
 
-    @Autowired
-    private ImpalaJdbcAdaptor impalaJdbc;
-
-    @Autowired
+    private ImpalaJdbcAdaptor impalaJdbcAdaptor;
     private ImpalaTable impalaTable;
+
+    public void setImpalaJdbcAdaptor(ImpalaJdbcAdaptor impalaJdbcAdaptor) {
+        this.impalaJdbcAdaptor = impalaJdbcAdaptor;
+    }
+
+    public void setImpalaTable(ImpalaTable impalaTable) {
+        this.impalaTable = impalaTable;
+    }
 
     /**
      * Separate add table method to add tables in Impala.
@@ -84,7 +88,7 @@ public class TransactionImpl implements Transaction {
     @Override
     public List<List<String>> executeQuery(String query, boolean removeHeader)
             throws SQLException {
-        List<List<String>> allColumnsRows = impalaJdbc.executeQuery(query);
+        List<List<String>> allColumnsRows = impalaJdbcAdaptor.executeQuery(query);
 
         if ((allColumnsRows.size() > 0) && removeHeader) {
             allColumnsRows.remove(0);

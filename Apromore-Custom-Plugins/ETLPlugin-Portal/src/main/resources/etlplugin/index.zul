@@ -19,10 +19,14 @@
   <http://www.gnu.org/licenses/lgpl-3.0.html>.
   #L%
   -->
+<!--<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>-->
+<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>
+<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>
+<!--<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>-->
+<!--<?script src="../../themes/ap/common/js/index.js"?>-->
 <?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <zk>
-
     <vlayout sclass="main-window" hflex="1" vflex="1" spacing="0.7em">
         <!-- Apromore banner -->
         <div sclass="banner-header" hflex="1">

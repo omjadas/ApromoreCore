@@ -54,7 +54,7 @@ public class InputExpandedExcerptViewModel {
     public void openExpandedWindow(@BindingParam("filename") String filename) {
         map.put("filename", filename);
         Window inputExpandedModal = (Window) Executions.createComponents(
-                "/views/input-expanded-modal.zul", null, map);
+                "views/input-expanded-modal.zul", null, map);
         inputExpandedModal.setMode("modal");
         inputExpandedModal.doModal();
     }

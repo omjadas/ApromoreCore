@@ -52,23 +52,47 @@ public class TransformPanelViewModel {
 
     private FileHandlerService fileHandlerService;
     private Transaction transaction;
-
-    @WireVariable
     private FileMetaData fileMetaData;
-    @WireVariable
     private TemplateTableBean templateTableBean;
+
+    /**
+     * Get the file meta data.
+     *
+     * @return the file meta data.
+     */
+    public FileMetaData getFileMetaData() {
+        return fileMetaData;
+    }
+
+    /**
+     * Get template table bean.
+     *
+     * @return the template table bean.
+     */
+    public TemplateTableBean getTemplateTableBean() {
+        return templateTableBean;
+    }
 
     /**
      * Initialise.
      */
     @Init
     public void init() {
-        fileHandlerService = (FileHandlerService) ((Map) Sessions.getCurrent()
-                .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-                .get("fileHandlerService");
-        transaction = (Transaction) ((Map) Sessions.getCurrent()
-                .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-                .get("transaction");
+        if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
+                .SESSION_ATTRIBUTE_KEY)) != null) {
+            fileHandlerService = (FileHandlerService) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileHandlerService");
+            transaction = (Transaction) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("transaction");
+            fileMetaData = (FileMetaData) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileMetaData");
+            templateTableBean = (TemplateTableBean) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("templateTableBean");
+        }
     }
 
     /**
@@ -178,7 +202,7 @@ public class TransformPanelViewModel {
     public void exportTransformParquet() {
         try {
             transaction.exportQuery(templateTableBean.getQuery(-1));
-            String path = System.getProperty("java.io.tmpdir") +
+            String path = "/tmp" +
                     System.getenv("DATA_STORE") + "/Exported";
             File file = fileHandlerService.getLastParquet(path);
             Filedownload.save(file, "application/octet-stream");

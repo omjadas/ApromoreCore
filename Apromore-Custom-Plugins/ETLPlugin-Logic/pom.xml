@@ -56,21 +56,6 @@
             <version>${commons-io}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zkbind</artifactId>
-            <version>${zk.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>com.springsource.javax.inject</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apromore</groupId>
-            <artifactId>apromore-manager</artifactId>
-            <version>1.1</version>
-        </dependency>
-
         <!-- Impala JDBC dependencies provided by your local repo -->
         <dependency>
             <groupId>com.cloudera.impala.jdbc</groupId>
@@ -97,8 +82,15 @@
             <artifactId>TCLIServiceClient</artifactId>
             <version>2.5.30</version>
         </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zul</artifactId>
+        </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -110,10 +102,29 @@
                 <configuration>
                     <instructions>
                         <Embed-Dependency>
-                            artifactId=retree
+                            artifactId=ImpalaJDBC41|hive_service|ql|hive_metastore|TCLIServiceClient
                         </Embed-Dependency>
                         <Import-Package>
-                            org.deckfour.xes.*;version="2.27",
+                            !sun.security.jgss,
+                            !com.sun.security.auth.module,
+                            !com.ibm.security.auth.module,
+                            !com.cloudera.dsi.ext.aetree,
+                            !org.apache.hive.service.cli.thrift,
+                            !org.apache.hadoop.hive.ql.plan.api,
+                            !org.apache.hadoop.hive.metastore.api,
+                            !javax.naming,
+                            !javax.naming.ldap,
+                            !javax.net.ssl,
+                            !javax.security.auth,
+                            !javax.security.auth.callback,
+                            !javax.security.auth.login,
+                            !javax.security.auth.x500,
+                            !javax.security.sasl,
+                            !javax.sql,
+                            !com.facebook.fb303,
+                            !org.apache.zookeeper,
+                            !org.apache.zookeeper.data,
+                            !org.ietf.jgss,
                             *
                         </Import-Package>
                         <!-- Export the packages -->

@@ -34,7 +34,6 @@ import java.util.List;
 /**
  * A class containing the file meta data.
  */
-@Component
 public class FileMetaData {
 
     private HashMap<String, List<String>> inputFileMeta;
@@ -45,8 +44,7 @@ public class FileMetaData {
     // List of imported columns.
     private List<Column> columns;
 
-    @Value("${some.key:false}")
-    private Boolean joinDone;
+    private Boolean joinDone = false;
 
     /**
      * Get the file meta map.

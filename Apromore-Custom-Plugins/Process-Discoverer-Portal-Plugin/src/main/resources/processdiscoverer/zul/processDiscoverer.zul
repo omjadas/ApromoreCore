@@ -29,9 +29,9 @@
 <?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>
 <?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>
 <?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>
-<?link rel="stylesheet" href="/processdiscoverer/css/ap/pd.css" type="text/css" ?>
 <?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>
 <?script src="../../themes/ap/common/js/index.js"?>
+<?link rel="stylesheet" href="/processdiscoverer/css/ap/pd.css" type="text/css" ?>
 <zk xmlns="http://www.zkoss.org/2005/zul"
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:w="client"

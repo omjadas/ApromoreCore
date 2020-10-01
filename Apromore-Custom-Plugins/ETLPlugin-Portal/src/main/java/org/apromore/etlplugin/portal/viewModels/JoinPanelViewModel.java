@@ -58,29 +58,39 @@ public class JoinPanelViewModel {
     private List<JoinQueryModel> joinQueryModels;
     private List<String> joins;
     private static final int LIMIT = 50;
+
     private Transaction transaction;
     private FileHandlerService fileHandlerService;
-
-    @WireVariable
     private FileMetaData fileMetaData;
-
-    @WireVariable
     private TemplateTableBean templateTableBean;
-
-    @WireVariable
     private Join join;
+
 
     /**
      * Initialise.
      */
     @Init
     public void init() {
-        fileHandlerService = (FileHandlerService) ((Map) Sessions.getCurrent()
-            .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-            .get("fileHandlerService");
-        transaction = (Transaction) ((Map) Sessions.getCurrent()
-            .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-            .get("transaction");
+        if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
+                .SESSION_ATTRIBUTE_KEY)) != null) {
+            fileHandlerService = (FileHandlerService) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileHandlerService");
+            transaction = (Transaction) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("transaction");
+            fileMetaData = (FileMetaData) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileMetaData");
+            templateTableBean = (TemplateTableBean) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("templateTableBean");
+            join = (Join) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("join");
+        }
+
+
         joinQueryModels = new ArrayList<JoinQueryModel>();
         joins = new ArrayList<String>();
         for (JoinType type: JoinType.values()) {
@@ -88,6 +98,10 @@ public class JoinPanelViewModel {
         }
 
         joinQueryModels.add(new JoinQueryModel());
+    }
+
+    public FileMetaData getFileMetaData() {
+        return fileMetaData;
     }
 
     /**

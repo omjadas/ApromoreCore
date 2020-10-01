@@ -35,10 +35,21 @@
   <osgi:reference id="fileHandlerService" interface="org.apromore.etlplugin.logic.services.FileHandlerService"/>
   <osgi:reference id="transaction" interface="org.apromore.etlplugin.logic.services.Transaction"/>
 
+
+  <!-- ETL Portal Bean -->
+  <beans:bean scope="bundle" id="fileMetaData" class="org.apromore.etlplugin.portal.models.sidePanelModel.FileMetaData"/>
+  <beans:bean scope="bundle" id="templateTableBean" class="org.apromore.etlplugin.portal.models.templateTableModel.TemplateTableBean">
+    <beans:property name="transaction" ref="transaction"/>
+  </beans:bean>
+  <beans:bean scope="bundle" id="join" class="org.apromore.etlplugin.portal.models.joinTableModel.Join"/>
+
   <!-- ETL Portal Bean -->
   <beans:bean scope="bundle" id="etlPluginPortal" class="org.apromore.etlplugin.portal.ETLPluginPortal">
     <beans:property name="fileHandlerService" ref="fileHandlerService"/>
     <beans:property name="transaction" ref="transaction"/>
+    <beans:property name="fileMetaData" ref="fileMetaData"/>
+    <beans:property name="templateTableBean" ref="templateTableBean"/>
+    <beans:property name="join" ref="join"/>
   </beans:bean>
 
   <!-- SERVICE: Portal Plugin bean -->

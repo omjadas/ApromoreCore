@@ -26,18 +26,19 @@ import org.apromore.etlplugin.logic.services.FileHandlerService;
 import org.apromore.etlplugin.logic.services.Transaction;
 import org.apromore.etlplugin.logic.services.impl.IllegalFileTypeException;
 import org.apromore.etlplugin.portal.ETLPluginPortal;
+import org.apromore.etlplugin.portal.models.joinTableModel.Join;
 import org.apromore.etlplugin.portal.models.sidePanelModel.FileMetaData;
 import org.apromore.etlplugin.portal.models.templateTableModel.TemplateTableBean;
 import org.jooq.conf.ParamType;
 import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
-import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zul.Fileupload;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zul.Messagebox;
 
 import java.io.IOException;
@@ -58,25 +59,55 @@ public class FileUploadViewModel {
     private static final Integer MAX_FILES_NUMBER = 10;
     private Boolean noFilesCheck;
 
-    private FileHandlerService fileHandlerService = (FileHandlerService) ((Map) Sessions.getCurrent()
-            .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-            .get("fileHandlerService");
-    private Transaction transaction = (Transaction) ((Map) Sessions.getCurrent()
-            .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-            .get("transaction");
-
-    @WireVariable
+    private FileHandlerService fileHandlerService;
+    private Transaction transaction;
     private FileMetaData fileMetaData;
-
-    @WireVariable
     private TemplateTableBean templateTableBean;
+    private Join join;
 
     /**
      * Initialise.
      */
     @Init
     public void init() {
+        if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
+                .SESSION_ATTRIBUTE_KEY)) != null) {
+            fileHandlerService = (FileHandlerService) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileHandlerService");
+            transaction = (Transaction) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("transaction");
+            fileMetaData = (FileMetaData) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("fileMetaData");
+            templateTableBean = (TemplateTableBean) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("templateTableBean");
+            join = (Join) ((Map) Sessions.getCurrent()
+                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
+                    .get("join");
+        }
+
         noFilesCheck = true;
+    }
+
+    /**
+     * Get the file meta data bean.
+     *
+     * @return the file meta data bean.
+     */
+    public FileMetaData getFileMetaData() {
+        return fileMetaData;
+    }
+
+    /**
+     * Get the template table bean in the view.
+     *
+     * @return the template table bean.
+     */
+    public TemplateTableBean getTemplateTableBean() {
+        return templateTableBean;
     }
 
     /**
@@ -84,9 +115,9 @@ public class FileUploadViewModel {
      */
     @NotifyChange("noFilesCheck")
     @Command("onFileUpload")
-    public void onFileUpload() {
+    public void onFileUpload(@BindingParam("event") UploadEvent event) {
 
-        Media[] medias = Fileupload.get(MAX_FILES_NUMBER);
+        Media[] medias = event.getMedias();
 
         if (medias != null && medias.length > 0 && medias.length <= 10) {
             String returnMessage;
@@ -167,7 +198,6 @@ public class FileUploadViewModel {
                                         "*"
                                 );
                             }
-
                             noFilesCheck = false;
                         }
                     }
@@ -177,9 +207,11 @@ public class FileUploadViewModel {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (IllegalFileTypeException e) {
+                e.printStackTrace();
                 Messagebox.show(e.getMessage());
+            } catch (NullPointerException e) {
+                e.printStackTrace();
             }
-
         } else {
             Messagebox.show(
                 NULL_UPLOAD_MESSAGE,

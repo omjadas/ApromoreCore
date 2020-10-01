@@ -19,7 +19,6 @@
   <http://www.gnu.org/licenses/lgpl-3.0.html>.
   #L%
   -->
-<?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>
 <zk>
     <window title="@load(vm.title)" border="normal" width="70%" mode="modal"
         apply="org.zkoss.bind.BindComposer" id="addRulesModal" contentStyle="overflow:auto"
@@ -44,7 +43,7 @@
                             <hlayout>
                                 <button label="x" onClick="@command('removeIfCase', index=forEachStatus.index)"
                                 sclass="redButton"/>
-                                <include ifElseCase="@load(each)" src="@load('etlplugin/views/if-condition-view.zul')"/>
+                                <include ifElseCase="@load(each)" src="@load('/etlplugin/views/if-condition-view.zul')"/>
                             </hlayout>
                         </cell>
                     </row>
@@ -55,7 +54,7 @@
                             <hlayout>
                                 <button label="x" onClick="@command('removeElseCase')"
                                 sclass="redButton"/>
-                                <include ifElseCase="@load(each)" src="@load('etlplugin/views/else-condition-view.zul')"/>
+                                <include ifElseCase="@load(each)" src="@load('/etlplugin/views/else-condition-view.zul')"/>
                             </hlayout>
                         </cell>
                     </row>

@@ -89,6 +89,7 @@
                             org.apromore.plugin.portal-custom-gui;version="[1.1,2.0)"
                         </Import-Bundle>
                         <Import-Package>
+                            !org.apache.hive.service.cli.thrift,
                             org.eclipse.virgo.web.dm,
                             org.aopalliance.aop,
                             net.sf.cglib.proxy,
@@ -112,6 +113,7 @@
                             org.deckfour.xes.out,
                             org.deckfour.xes.util,
                             org.deckfour.xes.xstream,
+
                             *;resolution:=optional
                         </Import-Package>
                         <Export-Package>

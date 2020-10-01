@@ -35,7 +35,6 @@ import static org.jooq.impl.DSL.*;
  * Join is used to create Join String using TableJoin Graph and running breadth
  * first search on it.
  */
-@Component
 public class Join {
     private List<JoinTable> tables;
 

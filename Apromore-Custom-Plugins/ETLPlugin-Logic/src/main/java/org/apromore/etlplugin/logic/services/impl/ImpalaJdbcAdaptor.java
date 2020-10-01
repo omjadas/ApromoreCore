@@ -21,8 +21,6 @@
  */
 package org.apromore.etlplugin.logic.services.impl;
 
-import org.springframework.stereotype.Component;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +28,6 @@ import java.util.List;
 /**
  * Impala JDBC Adaptor class to connect and execute queries.
  */
-@Component
 public class ImpalaJdbcAdaptor {
     // Impala connection info
     private final String connectionUrl = System.getenv("IMPALA_LINK");
