@@ -41,8 +41,6 @@ public class ImpalaTable {
     }
 
     // Impala connection info
-//    private final String dataPath = System.getProperty("java.io.tmpdir") +
-//        System.getenv("DATA_STORE");
     private final String dataPath = "/tmp" +
         System.getenv("DATA_STORE");
 

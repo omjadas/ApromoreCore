@@ -19,12 +19,6 @@
   <http://www.gnu.org/licenses/lgpl-3.0.html>.
   #L%
   -->
-<!--&lt;!&ndash;<?link rel="shortcut icon" href="../../themes/${labels.theme}/common/img/brand/favicon.ico" ?>&ndash;&gt;-->
-<!--&lt;!&ndash;<?link rel="stylesheet" href="../../css/chiaroscuro.css" type="text/css" ?>&ndash;&gt;-->
-<!--<?link rel="stylesheet" href="../../themes/${labels.theme}/common/css/index.css" type="text/css" ?>-->
-<!--&lt;!&ndash;<?link rel="stylesheet" href="../../themes/${labels.theme}/portal/css/portal.css" type="text/css" ?>&ndash;&gt;-->
-<!--&lt;!&ndash;<?script src="../../themes/ap/common/js/index.js"?>&ndash;&gt;-->
-<!--<?link rel="stylesheet" type="text/css" href="css/multi-event-log-plugin.css"?>-->
 <zk>
     <window sclass="card" vflex="7" apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm_joinExcerpt') @init('org.apromore.etlplugin.portal.viewModels.JoinExcerptViewModel')"

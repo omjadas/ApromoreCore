@@ -55,23 +55,9 @@ public class TemplateTableBean {
     }
 
     public TemplateTableBean() {
-//        if ((Sessions.getCurrent().getAttribute(ETLPluginPortal
-//                .SESSION_ATTRIBUTE_KEY)) != null) {
-//            transaction = (Transaction) ((Map) Sessions.getCurrent()
-//                    .getAttribute(ETLPluginPortal.SESSION_ATTRIBUTE_KEY))
-//                    .get("transaction");
-//        }
         columns = new ArrayList<>();
         addPlaceholderColumn();
     }
-
-//    /**
-//     * Do after bean has been initialised.
-//     */
-//    @Override
-//    public void afterPropertiesSet() throws Exception {
-//
-//    }
 
     /**
      * Add Column to Template Table.
@@ -125,7 +111,6 @@ public class TemplateTableBean {
     @NotifyChange(".")
     public void removeAllColumns() {
         columns.clear();
-
     }
 
     /**

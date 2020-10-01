@@ -49,28 +49,6 @@
             <groupId>javax.inject</groupId>
             <artifactId>com.springsource.javax.inject</artifactId>
         </dependency>
-        <!-- Spring 5 dependencies -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-web</artifactId>-->
-<!--            <version>${spring.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-context</artifactId>-->
-<!--            <version>${spring.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-test</artifactId>-->
-<!--            <version>${spring.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>cglib</groupId>-->
-<!--            <artifactId>cglib</artifactId>-->
-<!--            <version>3.3.0</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.zkoss.zk</groupId>
@@ -150,10 +128,6 @@
                         </Embed-Dependency>
                         <Import-Package>
                             org.apromore.plugin,
-<!--                            !org.apache.hive.service.cli.thrift,-->
-<!--                            org.apromore.etlplugin.logic.services,-->
-<!--                            org.apromore.etlplugin.logic.services.impl,-->
-<!--                            org.springframework,-->
                             *
                         </Import-Package>
                         <DynamicImport-Package>

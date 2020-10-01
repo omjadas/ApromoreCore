@@ -55,10 +55,20 @@ public class TransformPanelViewModel {
     private FileMetaData fileMetaData;
     private TemplateTableBean templateTableBean;
 
+    /**
+     * Get the file meta data.
+     *
+     * @return the file meta data.
+     */
     public FileMetaData getFileMetaData() {
         return fileMetaData;
     }
 
+    /**
+     * Get template table bean.
+     *
+     * @return the template table bean.
+     */
     public TemplateTableBean getTemplateTableBean() {
         return templateTableBean;
     }
@@ -194,8 +204,6 @@ public class TransformPanelViewModel {
             transaction.exportQuery(templateTableBean.getQuery(-1));
             String path = "/tmp" +
                     System.getenv("DATA_STORE") + "/Exported";
-//            String path = System.getProperty("java.io.tmpdir") +
-//                    System.getenv("DATA_STORE") + "/Exported";
             File file = fileHandlerService.getLastParquet(path);
             Filedownload.save(file, "application/octet-stream");
         } catch (SQLException e) {

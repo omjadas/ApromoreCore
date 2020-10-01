@@ -82,28 +82,6 @@
             <version>1.0</version>
         </dependency>
 -->
-<!--    OUR    -->
-<!--        <dependency>-->
-<!--            <groupId>org.zkoss.zk</groupId>-->
-<!--            <artifactId>zkbind</artifactId>-->
-<!--            <version>${zk.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.zkoss.zk</groupId>-->
-<!--            <artifactId>zkplus</artifactId>-->
-<!--            <version>${zk.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.zkoss.zk</groupId>-->
-<!--            <artifactId>zhtml</artifactId>-->
-<!--            <version>${zk.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.zkoss.zk</groupId>-->
-<!--            <artifactId>zkspring-core</artifactId>-->
-<!--            <version>4.0.0</version>-->
-<!--        </dependency>-->
-<!---->
         <dependency>
             <groupId>org.apromore</groupId>
             <artifactId>ui-theme-compact</artifactId>
